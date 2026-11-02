@@ -1,0 +1,30 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/CameraUI/CameraStyleSheet.uss?fileID=7433441132597879392&amp;guid=554ed114107918941a2b9c63a043256b&amp;type=3#CameraStyleSheet"/>
+    <ui:VisualElement name="root">
+        <ui:Image name="cam-border" src="">
+            <ui:Image name="cam-sprite" src="">
+                <ui:Box name="cam-name-box">
+                    <ui:TextElement name="cam-name" text="CurrentCam" />
+                    <ui:TextElement name="power-text" text="100" />
+                </ui:Box>
+                <ui:Box name="main">
+                    <ui:Box name="cams">
+                        <ui:Image name="cam-layout-sprite" src="" />
+                        <ui:Box name="cam-container">
+                            <ui:Button name="bathroom-btn" text="Bathroom" />
+                            <ui:Button name="fourb-btn" text="4B" />
+                            <ui:Button name="janitor-btn" text="Janitor" />
+                            <ui:Button name="kitchen-btn" text="Kitchen" />
+                            <ui:Button name="l-hallway-btn" text="Left Hallway" />
+                            <ui:Button name="r-hallway-btn" text="Right Hallway" />
+                            <ui:Button name="parts-service-btn" text="Parts &amp; Service" />
+                            <ui:Button name="party-btn" text="Party Room" />
+                            <ui:Button name="pirate-cove-btn" text="Pirate Cove" />
+                            <ui:Button name="stage-btn" text="Stage" />
+                        </ui:Box>
+                    </ui:Box>
+                </ui:Box>
+            </ui:Image>
+        </ui:Image>
+    </ui:VisualElement>
+</ui:UXML>

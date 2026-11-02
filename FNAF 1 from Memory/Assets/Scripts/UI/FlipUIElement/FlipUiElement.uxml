@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/FlipUIElement/FlipUSSElement.uss?fileID=7433441132597879392&amp;guid=48901b77e7dbb04468baa00ae957c8a2&amp;type=3#FlipUSSElement"/>
+    <FlipElement>
+        <ui:Box name="flip-sprite-container">
+            <ui:Image name="flip-sprite" src=""/>
+        </ui:Box>
+    </FlipElement>
+</ui:UXML>
