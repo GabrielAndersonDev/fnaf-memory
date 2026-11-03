@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class Office : Location
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public Door leftDoor;
+    public AnimData leftDoorSlot;
+    public DoorBtn leftDoorBtn;
+    public LightBtn leftLightBtn;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Door rightDoor;
+    public AnimData rightDoorSlot;
+    public DoorBtn rightDoorBtn;
+    public LightBtn rightLightBtn;
+
+    
 }

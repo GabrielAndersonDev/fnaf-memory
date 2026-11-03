@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class Event : MonoBehaviour
 {
+    // one out of X chance
     public int chance;
 
     void EventTrigger()

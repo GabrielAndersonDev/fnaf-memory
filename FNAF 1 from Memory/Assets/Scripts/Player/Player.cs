@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static Player Instance;
+    public static Player Singleton { get; private set; }
     public float power;
 
     // foxy listens for in cam flips
@@ -13,9 +13,14 @@ public class Player : MonoBehaviour
 
     public void Awake()
     {
-        if (Instance == null)
+        if (Singleton != null && Singleton != this)
         {
-            Instance = this;
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            Singleton = this;
         }
     }
 

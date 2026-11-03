@@ -51,9 +51,9 @@ public class GameUIManager : MonoBehaviour
 
     public void InitUI()
     {
-        if (Player.Instance != null)
+        if (Player.Singleton != null)
         {
-            player = Player.Instance;
+            player = Player.Singleton;
         }
         else
         {
@@ -102,13 +102,15 @@ public class GameUIManager : MonoBehaviour
 
     void AddFlipElement()
     {
-        FlipElement flipElementInstance = flipElement.Instantiate().Q<FlipElement>();
+        FlipElement flipElementCam = flipElement.Instantiate().Q<FlipElement>();
+        FlipElement flipElementOffice = flipElement.Instantiate().Q<FlipElement>();
 
-        camSprite.Add(flipElementInstance);
+        camSprite.Add(flipElementCam);
+
     }
 
     void SetButtonControls()
     {
-
+        
     }
 }

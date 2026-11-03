@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 194e4b09e17163c439a8e4ff95ca711d, type: 3}
+  m_Name: Night6
+  m_EditorClassIdentifier: Assembly-CSharp::AnimDifficulty
+  night: 6
+  freddy: 12
+  bonnie: 14
+  chica: 14
+  foxy: 13
