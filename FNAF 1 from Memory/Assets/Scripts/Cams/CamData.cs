@@ -1,11 +1,11 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LocationData", menuName = "Scriptable Objects/LocationData")]
-public class LocationData : ScriptableObject
+public class CamData : ScriptableObject
 {
-    public int locationID;
-    Location[] connectedLocations;
-    Sprite emptyLocation;
+    public int camID;
+    public CamEnum cam;
+    Sprite emptyCam;
 
     AnimData[] potentialAnim;
     Sprite[] occupiedSpriteArr;

@@ -4,8 +4,10 @@ using UnityEngine.UIElements;
 
 public class GameUIManager : MonoBehaviour
 {
+    // may remove if i get events working well idk
     public static GameUIManager Singleton { get; private set; }
-    Player player;
+
+    VisualElement baseGameUI;
 
     [SerializeField]
     GameObject officeObject;
@@ -17,9 +19,14 @@ public class GameUIManager : MonoBehaviour
 
     [SerializeField]
     VisualTreeAsset flipElement;
+    [SerializeField]
+    Sprite flipSprite;
 
-    TextElement officePower;
-    TextElement camsPower;
+    TextElement powerText;
+    Box powerUseSpriteContainer;
+    TextElement hourText;
+    Box flipContainer;
+
     TextElement currentCamText;
 
     Image camSprite;
@@ -51,23 +58,16 @@ public class GameUIManager : MonoBehaviour
 
     public void InitUI()
     {
-        if (Player.Singleton != null)
-        {
-            player = Player.Singleton;
-        }
-        else
-        {
-            Debug.Log("Player Instance is not valid in GameUIManager.");
-            Debug.Break();
-        }
-
+        baseGameUI = gameObject.GetComponent<UIDocument>().rootVisualElement;
         officeUI = officeObject.GetComponent<UIDocument>().rootVisualElement;
         camsUI = camsObject.GetComponent<UIDocument>().rootVisualElement;
 
-        officePower = officeUI.Q<TextElement>("power-text");
-        camsPower = camsUI.Q<TextElement>("power-text");
-        currentCamText = camsUI.Q<TextElement>("cam-name");
+        powerText = baseGameUI.Q<TextElement>("power-text");
+        powerUseSpriteContainer = baseGameUI.Q<Box>("power-use-sprite-container");
+        hourText = baseGameUI.Q<TextElement>("hour-text");
+        flipContainer = baseGameUI.Q<Box>("flip-container");
 
+        currentCamText = camsUI.Q<TextElement>("cam-name");
         camSprite = camsUI.Q<Image>("cam-sprite");
 
         bathroomBtn = camsUI.Q<Button>("bathroom-btn");
@@ -83,8 +83,14 @@ public class GameUIManager : MonoBehaviour
 
 
         AddFlipElement();
+        CamsManager.Singleton.OnCamFlip += CamFlipUIToggle;
 
-        if (player.inCams)
+        CamFlipUIToggle(CamsManager.Singleton.inCams);
+    }
+
+    void CamFlipUIToggle(bool toggle)
+    {
+        if (toggle)
         {
             camsUI.SetEnabled(true);
             officeUI.SetEnabled(false);
@@ -102,11 +108,11 @@ public class GameUIManager : MonoBehaviour
 
     void AddFlipElement()
     {
-        FlipElement flipElementCam = flipElement.Instantiate().Q<FlipElement>();
-        FlipElement flipElementOffice = flipElement.Instantiate().Q<FlipElement>();
+        FlipElement flipElementInstance = flipElement.Instantiate().Q<FlipElement>();
+        flipElementInstance.Q<Image>("flip-sprite").sprite = flipSprite;
+        CamsManager.Singleton.AddFlipEvent(flipElementInstance);
 
-        camSprite.Add(flipElementCam);
-
+        flipContainer.Add(flipElementInstance);
     }
 
     void SetButtonControls()

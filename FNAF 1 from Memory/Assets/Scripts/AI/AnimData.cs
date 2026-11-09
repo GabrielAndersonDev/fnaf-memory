@@ -3,9 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AnimData", menuName = "Scriptable Objects/AnimData")]
 public abstract class AnimData : ScriptableObject
 {
-    public Location startLocation;
-    public Location currentLocation;
-    public Location[] usableLocations;
+    public CamData startLocation;
+    public CamData[] usableLocations;
 
     int difficulty;
     bool canMove;

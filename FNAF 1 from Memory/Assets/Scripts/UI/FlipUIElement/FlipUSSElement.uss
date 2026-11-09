@@ -5,12 +5,11 @@
 	border-color: rgba(0, 0, 0, 0);
 }
 
-#flip-sprite-container,
-#flip-sprite {
-	position: absolute;
+#flip-sprite-container {
+	bottom: 0;
+	height: 12%;
 }
 
-#flip-sprite-container {
-	bottom: 5px;
-	height: 12%;
+#flip-sprite {
+	width: 45%
 }

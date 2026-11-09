@@ -5,7 +5,6 @@
             <ui:Image name="cam-sprite" src="">
                 <ui:Box name="cam-name-box">
                     <ui:TextElement name="cam-name" text="CurrentCam" />
-                    <ui:TextElement name="power-text" text="100" />
                 </ui:Box>
                 <ui:Box name="main">
                     <ui:Box name="cams">

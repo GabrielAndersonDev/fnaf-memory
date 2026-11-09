@@ -1,0 +1,37 @@
+* {
+	background-color: rgba(0, 0, 0, 0);
+	border-color: rgba(0, 0, 0, 0);
+}
+
+#root {
+	height: 100%;
+	width: 100%;
+	justify-content: space-between;
+	flex-direction: column;
+}
+
+#hour-container,
+#power-container,
+#flip-container {
+	position: absolute;
+}
+
+#hour-container {
+	top: 1%;
+	right: 1%;
+}
+
+#hour-text {
+	-unity-text-align: upper-right;
+}
+
+#power-container {
+	bottom: 1%;
+	left: 1%;
+	flex-direction: column;
+}
+
+#flip-container {
+	bottom: 0;
+	left: 48%;
+}
