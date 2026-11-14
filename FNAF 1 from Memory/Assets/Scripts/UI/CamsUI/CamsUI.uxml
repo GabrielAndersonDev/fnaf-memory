@@ -3,6 +3,8 @@
     <ui:VisualElement name="root">
         <ui:Image name="cam-border" src="">
             <ui:Image name="cam-sprite" src="">
+                <ui:Box name="cam-sprite-container">
+                </ui:Box>
                 <ui:Box name="cam-name-box">
                     <ui:TextElement name="cam-name" text="CurrentCam" />
                 </ui:Box>
@@ -10,16 +12,6 @@
                     <ui:Box name="cams">
                         <ui:Image name="cam-layout-sprite" src="" />
                         <ui:Box name="cam-container">
-                            <ui:Button name="bathroom-btn" id="0" text="Bathroom" />
-                            <ui:Button name="fourb-btn" id="1" text="4B" />
-                            <ui:Button name="janitor-btn" id="2" text="Janitor" />
-                            <ui:Button name="kitchen-btn" id="3" text="Kitchen" />
-                            <ui:Button name="l-hallway-btn" id="4" text="Left Hallway" />
-                            <ui:Button name="r-hallway-btn" id="5" text="Right Hallway" />
-                            <ui:Button name="parts-service-btn" id="6" text="Parts &amp; Service" />
-                            <ui:Button name="party-btn" id="7" text="Party Room" />
-                            <ui:Button name="pirate-cove-btn" id="8" text="Pirate Cove" />
-                            <ui:Button name="stage-btn" id="9" text="Stage" />
                         </ui:Box>
                     </ui:Box>
                 </ui:Box>

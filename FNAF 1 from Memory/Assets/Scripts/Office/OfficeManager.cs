@@ -5,9 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class OfficeManager : MonoBehaviour
 {
-    PlayerInput playerInput;
-    InputAction interactAction;
-    InputAction lookAction;
+    public static OfficeManager Singleton { get; private set; }
+    public PlayerInput playerInput;
 
     public event Action<bool> LDoorBtn;
     public event Action<bool> RDoorBtn;
@@ -24,32 +23,32 @@ public class OfficeManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        if (Singleton != null && Singleton != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            Singleton = this;
+        }
+
         playerInput = GetComponent<PlayerInput>();
-        lookAction = playerInput.actions.FindAction("Look");
-        interactAction = playerInput.actions.FindAction("Interact");
-    }
-
-    void OnEnable()
-    {
-        lookAction.Enable();
-        interactAction.Enable();
-    }
-
-    void OnDisable()
-    {
-        lookAction.Disable();
-        interactAction.Disable();
     }
 
     // mouse position set
     void Update()
     {
-        MouseScreenCheck();
+        if (Mouse.current == null)
+        {
+            return;
+        }
+
+        Vector2 mousePos = Mouse.current.position.ReadValue();
     }
 
-    void MouseScreenCheck()
+    void MouseScreenCheck(Vector2 mousePos)
     {
-        Vector3 mousePos = lookAction.ReadValue<Vector2>();
         float baseSpeed = 1;
 
         float screenDif = (float)(Screen.width * 0.2);

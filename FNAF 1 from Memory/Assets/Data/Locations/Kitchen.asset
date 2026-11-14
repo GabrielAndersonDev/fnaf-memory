@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Kitchen
   m_EditorClassIdentifier: Assembly-CSharp::LocationData
   camID: 3
-  cam: 0
+  CamName: Kitchen
+  cam: 3

@@ -1,6 +1,7 @@
 * {
 	background-color: rgba(0, 0, 0, 0);
 	border-color: rgba(0, 0, 0, 0);
+	
 }
 
 #root {
@@ -8,6 +9,7 @@
 	width: 100%;
 	justify-content: space-between;
 	flex-direction: column;
+	position: absolute;
 }
 
 #hour-container,

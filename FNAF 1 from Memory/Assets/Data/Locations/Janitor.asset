@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Janitor
   m_EditorClassIdentifier: Assembly-CSharp::LocationData
   camID: 2
-  cam: 0
+  CamName: Janitor
+  cam: 2

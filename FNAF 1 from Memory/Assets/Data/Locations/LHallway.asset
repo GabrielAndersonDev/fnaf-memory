@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: LHallway
   m_EditorClassIdentifier: Assembly-CSharp::LocationData
   camID: 4
-  cam: 0
+  CamName: Left Hallway
+  cam: 4

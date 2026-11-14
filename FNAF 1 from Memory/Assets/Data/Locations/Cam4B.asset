@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Cam4B
   m_EditorClassIdentifier: Assembly-CSharp::LocationData
   camID: 1
-  cam: 0
+  CamName: 4B
+  cam: 1

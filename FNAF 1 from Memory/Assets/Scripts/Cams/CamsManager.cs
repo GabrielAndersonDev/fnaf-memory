@@ -17,6 +17,9 @@ public enum CamEnum
     Party,
     PirateCove,
     Stage,
+    Office,
+    LDoor,
+    RDoor,
     Max
 }
 
@@ -25,13 +28,15 @@ public class CamsManager : MonoBehaviour
     public static CamsManager Singleton {  get; private set; }
     public Dictionary<CamEnum, CamData> EnumCamsDictionary;
 
-    [SerializeField]
-    CamData[] camDataArr;
+    public CamData[] camDataArr;
 
     public CamEnum currentCam;
     public bool inCams;
 
     public event Action<bool> OnCamFlip;
+
+    // event will probably change when i get those working, int is foxy stages
+    public event Action<CamEnum, AnimatronicEnum[], Event[], int?> OnCamSwitch;
 
     public void Awake()
     {
@@ -82,21 +87,42 @@ public class CamsManager : MonoBehaviour
         }
     }
 
-    public void AddFlipEvent(FlipElement flipElement)
-    {
-        flipElement.TriggerCamFlip += FlipCam;
-    }
-
-    void FlipCam()
+    public void FlipCam()
     {
         inCams = !inCams;
-        Debug.Log("CameraFlip");
+        Debug.Log("CameraFlip "  + inCams);
 
         OnCamFlip?.Invoke(inCams);
     }
 
     public void SwitchCam(CamEnum cam)
     {
+        if (cam == CamEnum.Invalid || cam == CamEnum.None)
+        {
+            Debug.LogError("CamsManager: Invalid cam switch attempted.");
+            return;
+        }
 
+        currentCam = cam;
+
+        var anims = new List<AnimatronicEnum>();
+        var foxyStage = (int?)null;
+
+        if (cam == CamEnum.PirateCove)
+        {
+            AnimatronicEnum[] animEnum = foxyStage == 3 ? new AnimatronicEnum[] { } : new AnimatronicEnum[] { AnimatronicEnum.Foxy };
+            OnCamSwitch?.Invoke(cam, animEnum, null, foxyStage);
+            return;
+        }
+
+        foreach (AnimatronicEnum anim in AIManager.Singleton.AnimLocations.Keys)
+        {
+            if (AIManager.Singleton.AnimLocations[anim] == cam)
+            {
+                anims.Add(anim);
+            }
+        }
+
+        OnCamSwitch?.Invoke(cam, anims.ToArray(), null, foxyStage);
     }
 }

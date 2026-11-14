@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540cb9191f5b7064fb00cba80d15ee33, type: 3}
   m_Name: Bathroom
   m_EditorClassIdentifier: Assembly-CSharp::LocationData
-  locationID: 0
+  camID: 0
+  CamName: Bathroom
+  cam: 0

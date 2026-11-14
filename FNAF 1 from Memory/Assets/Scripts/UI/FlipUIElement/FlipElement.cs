@@ -1,30 +1,17 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 [UxmlElement]
-public partial class FlipElement : VisualElement, IPointerEnterHandler, IPointerExitHandler
+public partial class FlipElement : VisualElement
 {
-    bool isHovering;
-    public event Action TriggerCamFlip;
+    private Image FlipSprite => this.Q<Image>("flip-sprite");
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void SetFlipSprite(Sprite sprite)
     {
-        if (isHovering)
-        {
-            return;
-        }
-        else
-        {
-            TriggerCamFlip?.Invoke();
-            isHovering = true;
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        isHovering = false;
+        FlipSprite.sprite = sprite;
     }
 
     public FlipElement() { }

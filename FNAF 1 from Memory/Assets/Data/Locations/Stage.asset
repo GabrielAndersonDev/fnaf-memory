@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Stage
   m_EditorClassIdentifier: Assembly-CSharp::LocationData
   camID: 9
-  cam: 0
+  CamName: Stage
+  cam: 9

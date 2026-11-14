@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Party
   m_EditorClassIdentifier: Assembly-CSharp::LocationData
   camID: 7
-  cam: 0
+  CamName: Party
+  cam: 7

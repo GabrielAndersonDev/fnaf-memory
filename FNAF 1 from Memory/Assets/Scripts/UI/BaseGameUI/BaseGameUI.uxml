@@ -10,6 +10,6 @@
             </ui:Box>
         </ui:Box>
         <ui:Box name="flip-container">
-         </ui:Box>
+        </ui:Box>
     </ui:VisualElement>
 </ui:UXML>

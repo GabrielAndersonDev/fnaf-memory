@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: PirateCove
   m_EditorClassIdentifier: Assembly-CSharp::LocationData
   camID: 8
-  cam: 0
+  CamName: Pirate Cove
+  cam: 8

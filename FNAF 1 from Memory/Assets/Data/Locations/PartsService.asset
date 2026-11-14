@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: PartsService
   m_EditorClassIdentifier: Assembly-CSharp::LocationData
   camID: 6
-  cam: 0
+  CamName: Parts & Service
+  cam: 6
