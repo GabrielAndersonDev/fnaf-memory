@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "BonnieData", menuName = "Scriptable Objects/BonnieData")]
 public class Bonnie : AnimData
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created

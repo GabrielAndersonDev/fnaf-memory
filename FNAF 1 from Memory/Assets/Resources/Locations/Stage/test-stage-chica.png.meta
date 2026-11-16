@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 5d2f92029d4af1544908157286ee1cf9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7523243048811922169
+    second: test-stage-chica_0
+  - first:
+      213: 9094844235319123915
+    second: test-stage-chica_1
+  - first:
+      213: 4526107375824158877
+    second: test-stage-chica_2
+  - first:
+      213: 3594579356541416839
+    second: test-stage-chica_3
+  - first:
+      213: 4504194358868403347
+    second: test-stage-chica_4
+  - first:
+      213: 3102844138604880260
+    second: test-stage-chica_5
+  - first:
+      213: -711291648882676153
+    second: test-stage-chica_6
+  - first:
+      213: -1608622081697458225
+    second: test-stage-chica_7
+  - first:
+      213: 4785703383406261487
+    second: test-stage-chica_8
+  - first:
+      213: -1044796913265849657
+    second: test-stage-chica_9
+  - first:
+      213: -2029351486705757712
+    second: test-stage-chica_10
+  - first:
+      213: -1180079755848694879
+    second: test-stage-chica_11
+  - first:
+      213: -4541064407118560610
+    second: test-stage-chica_12
+  - first:
+      213: 8743001792136582686
+    second: test-stage-chica_13
+  - first:
+      213: 5572352803583997310
+    second: test-stage-chica_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: test-stage-chica_0
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 509
+        width: 458
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70d73a49e42189790800000000000000
+      internalID: -7523243048811922169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_1
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 482
+        width: 376
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcf94bd35a0673e70800000000000000
+      internalID: 9094844235319123915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_2
+      rect:
+        serializedVersion: 2
+        x: 1307
+        y: 0
+        width: 271
+        height: 503
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d90464f8da6ffce30800000000000000
+      internalID: 4526107375824158877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_3
+      rect:
+        serializedVersion: 2
+        x: 1657
+        y: 358
+        width: 42
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7857a9f31e282e130800000000000000
+      internalID: 3594579356541416839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_4
+      rect:
+        serializedVersion: 2
+        x: 1754
+        y: 451
+        width: 97
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3946ba7b7ec128e30800000000000000
+      internalID: 4504194358868403347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_5
+      rect:
+        serializedVersion: 2
+        x: 1768
+        y: 192
+        width: 67
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48162f2fd448f0b20800000000000000
+      internalID: 3102844138604880260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_6
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 358
+        width: 39
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74e65a0930cf026f0800000000000000
+      internalID: -711291648882676153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_7
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 362
+        width: 51
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc7d2925db60da9e0800000000000000
+      internalID: -1608622081697458225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_8
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 411
+        width: 8
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe4b0581fdb3a6240800000000000000
+      internalID: 4785703383406261487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_9
+      rect:
+        serializedVersion: 2
+        x: 1732
+        y: 359
+        width: 50
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ca4d523eb22081f0800000000000000
+      internalID: -1044796913265849657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_10
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 355
+        width: 50
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f11e76239b46d3e0800000000000000
+      internalID: -2029351486705757712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_11
+      rect:
+        serializedVersion: 2
+        x: 1566
+        y: 200
+        width: 218
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a34202e6b38f9fe0800000000000000
+      internalID: -1180079755848694879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_12
+      rect:
+        serializedVersion: 2
+        x: 1526
+        y: 145
+        width: 278
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9247873bf5eaf0c0800000000000000
+      internalID: -4541064407118560610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_13
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 0
+        width: 32
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1697eabec1655970800000000000000
+      internalID: 8743001792136582686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-chica_14
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 0
+        width: 17
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e75b6cce959f45d40800000000000000
+      internalID: 5572352803583997310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      test-stage-chica_0: -7523243048811922169
+      test-stage-chica_1: 9094844235319123915
+      test-stage-chica_10: -2029351486705757712
+      test-stage-chica_11: -1180079755848694879
+      test-stage-chica_12: -4541064407118560610
+      test-stage-chica_13: 8743001792136582686
+      test-stage-chica_14: 5572352803583997310
+      test-stage-chica_2: 4526107375824158877
+      test-stage-chica_3: 3594579356541416839
+      test-stage-chica_4: 4504194358868403347
+      test-stage-chica_5: 3102844138604880260
+      test-stage-chica_6: -711291648882676153
+      test-stage-chica_7: -1608622081697458225
+      test-stage-chica_8: 4785703383406261487
+      test-stage-chica_9: -1044796913265849657
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

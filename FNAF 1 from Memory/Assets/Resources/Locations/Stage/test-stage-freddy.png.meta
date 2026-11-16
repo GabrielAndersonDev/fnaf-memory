@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: b4a7a7f8b749d554fb05fd7bc031d326
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -387252824982120778
+    second: test-stage-freddy_0
+  - first:
+      213: -1241764854242529697
+    second: test-stage-freddy_1
+  - first:
+      213: -8820732258729585873
+    second: test-stage-freddy_2
+  - first:
+      213: -6103509080759857257
+    second: test-stage-freddy_3
+  - first:
+      213: 6935982571775975042
+    second: test-stage-freddy_4
+  - first:
+      213: -667247559321682195
+    second: test-stage-freddy_5
+  - first:
+      213: 8784553365056321303
+    second: test-stage-freddy_6
+  - first:
+      213: -8051128712132369196
+    second: test-stage-freddy_7
+  - first:
+      213: -6632423935942813027
+    second: test-stage-freddy_8
+  - first:
+      213: 735349204955512623
+    second: test-stage-freddy_9
+  - first:
+      213: 6869254417445052749
+    second: test-stage-freddy_10
+  - first:
+      213: -74707524301259453
+    second: test-stage-freddy_11
+  - first:
+      213: -1860522619536269239
+    second: test-stage-freddy_12
+  - first:
+      213: 2321528646175809396
+    second: test-stage-freddy_13
+  - first:
+      213: -6212997444834232269
+    second: test-stage-freddy_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: test-stage-freddy_0
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 957
+        width: 111
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b69ca08b9330aaf0800000000000000
+      internalID: -387252824982120778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_1
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 354
+        width: 584
+        height: 714
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5e2f48b17d54cee0800000000000000
+      internalID: -1241764854242529697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_2
+      rect:
+        serializedVersion: 2
+        x: 1203
+        y: 1014
+        width: 130
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f231893beb6769580800000000000000
+      internalID: -8820732258729585873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_3
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 870
+        width: 183
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79f00fd24dafb4ba0800000000000000
+      internalID: -6103509080759857257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_4
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 43
+        width: 302
+        height: 314
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28ed10f866f814060800000000000000
+      internalID: 6935982571775975042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_5
+      rect:
+        serializedVersion: 2
+        x: 871
+        y: 340
+        width: 33
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dee726941e57db6f0800000000000000
+      internalID: -667247559321682195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_6
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 336
+        width: 52
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 717f4a23eb009e970800000000000000
+      internalID: 8784553365056321303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_7
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 0
+        width: 549
+        height: 402
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d4e660d715a44090800000000000000
+      internalID: -8051128712132369196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_8
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 68
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9a94520295e4f3a0800000000000000
+      internalID: -6632423935942813027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_9
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 30
+        width: 44
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2f3d33b43c743a00800000000000000
+      internalID: 735349204955512623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_10
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 0
+        width: 106
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41689f6f7e745f50800000000000000
+      internalID: 6869254417445052749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_11
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 0
+        width: 33
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34d79f707e596fef0800000000000000
+      internalID: -74707524301259453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_12
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 0
+        width: 46
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94026f5f8881e26e0800000000000000
+      internalID: -1860522619536269239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_13
+      rect:
+        serializedVersion: 2
+        x: 1441
+        y: 0
+        width: 32
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47fd333f00ab73020800000000000000
+      internalID: 2321528646175809396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: test-stage-freddy_14
+      rect:
+        serializedVersion: 2
+        x: 1455
+        y: 0
+        width: 74
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 338fe36edbff6c9a0800000000000000
+      internalID: -6212997444834232269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      test-stage-freddy_0: -387252824982120778
+      test-stage-freddy_1: -1241764854242529697
+      test-stage-freddy_10: 6869254417445052749
+      test-stage-freddy_11: -74707524301259453
+      test-stage-freddy_12: -1860522619536269239
+      test-stage-freddy_13: 2321528646175809396
+      test-stage-freddy_14: -6212997444834232269
+      test-stage-freddy_2: -8820732258729585873
+      test-stage-freddy_3: -6103509080759857257
+      test-stage-freddy_4: 6935982571775975042
+      test-stage-freddy_5: -667247559321682195
+      test-stage-freddy_6: 8784553365056321303
+      test-stage-freddy_7: -8051128712132369196
+      test-stage-freddy_8: -6632423935942813027
+      test-stage-freddy_9: 735349204955512623
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

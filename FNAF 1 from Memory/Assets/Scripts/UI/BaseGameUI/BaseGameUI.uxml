@@ -1,12 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/UI/BaseGameUI/BaseGameUSS.uss?fileID=7433441132597879392&amp;guid=7713b4862d3b10347aa7e71e9c853c78&amp;type=3#BaseGameUSS"/>
-    <ui:VisualElement name="root">
-        <ui:Box name="hour-container">
-            <ui:TextElement name="hour-text" text="undefined" />
+    <ui:VisualElement name="root" picking-mode="Ignore">
+        <ui:Box name="hour-container" picking-mode="Ignore">
+            <ui:TextElement name="hour-text" text="undefined" picking-mode="Ignore" />
         </ui:Box>
-        <ui:Box name="power-container">
-            <ui:TextElement name="power-text" text="100" />
-            <ui:Box name="power-use-sprite-container">
+        <ui:Box name="power-container" picking-mode="Ignore">
+            <ui:TextElement name="power-text" text="100" picking-mode="Ignore" />
+            <ui:Box name="power-use-sprite-container" picking-mode="Ignore">
             </ui:Box>
         </ui:Box>
         <ui:Box name="flip-container">

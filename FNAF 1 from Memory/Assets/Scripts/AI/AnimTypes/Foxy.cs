@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "FoxyData", menuName = "Scriptable Objects/FoxyData")]
 public class Foxy : AnimData
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created

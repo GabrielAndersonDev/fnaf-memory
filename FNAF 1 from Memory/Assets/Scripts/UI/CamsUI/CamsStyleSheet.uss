@@ -32,9 +32,11 @@
 	
 }
 
-#cam-layout-sprite,
-#flip-sprite-container,
-#flip-sprite {
+#cam-sprite, #cam-sprite-container, #cam-sprite-container Image {
+	position: absolute;
+}
+
+#cam-layout-sprite {
 	position: absolute;
 	opacity: 0;
 }

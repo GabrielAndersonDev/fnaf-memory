@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Scripts/UI/CameraUI/CameraStyleSheet.uss?fileID=7433441132597879392&amp;guid=554ed114107918941a2b9c63a043256b&amp;type=3#CameraStyleSheet"/>
+    <Style src="project://database/Assets/Scripts/UI/CameraUI/CamsStyleSheet.uss?fileID=7433441132597879392&amp;guid=554ed114107918941a2b9c63a043256b&amp;type=3#CamsStyleSheet"/>
     <ui:VisualElement name="root">
         <ui:Image name="cam-border" src="">
             <ui:Image name="cam-sprite" src="">

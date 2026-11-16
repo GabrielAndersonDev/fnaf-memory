@@ -7,7 +7,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 540cb9191f5b7064fb00cba80d15ee33, type: 3}
   m_Name: PirateCove
@@ -15,3 +15,13 @@ MonoBehaviour:
   camID: 8
   CamName: Pirate Cove
   cam: 8
+  emptyCam: {fileID: 3267077627818543493, guid: d29c0ee352af6dc4faa9e80777b393b6, type: 3}
+  animSpriteDataArr:
+  - anim: 3
+    sprite: {fileID: 21300000, guid: 77c009708da9b3040bfe104cdc629652, type: 3}
+  foxySprites:
+  - {fileID: 3267077627818543493, guid: d29c0ee352af6dc4faa9e80777b393b6, type: 3}
+  - {fileID: 3267077627818543493, guid: d29c0ee352af6dc4faa9e80777b393b6, type: 3}
+  - {fileID: 3267077627818543493, guid: d29c0ee352af6dc4faa9e80777b393b6, type: 3}
+  - {fileID: 3267077627818543493, guid: d29c0ee352af6dc4faa9e80777b393b6, type: 3}
+  events: []

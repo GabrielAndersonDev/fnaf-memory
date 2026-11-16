@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 87716317}
   - component: {fileID: 87716318}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BaseGameUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 233164879}
   - component: {fileID: 233164880}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CameraUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,6 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 630234946}
+  - component: {fileID: 630234947}
   m_Layer: 0
   m_Name: AIManager
   m_TagString: Untagged
@@ -408,6 +409,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &630234947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630234945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322967d60fae932438bdc9c55c6230d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AIManager
+  animatronics:
+  - {fileID: 11400000, guid: ecbce96509f692347a99210a48186215, type: 2}
+  - {fileID: 11400000, guid: 7e329787b8563574b9f685d80019509d, type: 2}
+  - {fileID: 11400000, guid: 07fb0049e238e9f44a9cdf34e72a6e2e, type: 2}
+  - {fileID: 11400000, guid: 25c611ed002122a44843af01c014ff91, type: 2}
+  - {fileID: 11400000, guid: be24f2ed38ff97b4bba68e375ff7ef7e, type: 2}
+  foxyStage: 0
 --- !u!1 &680875407
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +705,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29373490485e41b48a7222eb2ebfac72, type: 2}
   - {fileID: 11400000, guid: d2898a1b203b8864c856ce84a50fc953, type: 2}
   - {fileID: 11400000, guid: ec4abbf3c3d6d234b85b7266f5153ba6, type: 2}
-  currentCam: 0
+  currentCam: 9
   inCams: 0
 --- !u!4 &1291452600
 Transform:
@@ -779,16 +799,16 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -432297787
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 5773929897244046117, guid: 5e3b9af3279bcc34cb152d2e755d21f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.26, y: 0.33}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

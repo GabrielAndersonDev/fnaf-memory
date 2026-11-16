@@ -79,6 +79,8 @@ public class GameUIManager : MonoBehaviour
         AddFlipElement();
         SetButtonControls();
 
+        baseGameUI.BringToFront();
+
         CamsManager.Singleton.OnCamFlip += CamFlipUIToggle;
         CamFlipUIToggle(CamsManager.Singleton.inCams);
 
@@ -145,7 +147,7 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
-    void UpdateCamUI(CamEnum cam, AnimatronicEnum[] anims, Event[] events, int? foxyStage)
+    void UpdateCamUI(CamEnum cam, AnimatronicEnum[] anims, EventData[] events, int foxyStage)
     {
         if (cam == CamEnum.Invalid || cam == CamEnum.None || cam == CamEnum.Max)
         {
@@ -153,12 +155,11 @@ public class GameUIManager : MonoBehaviour
             return;
         }
 
-        if (camSpriteContainer.childCount > 0)
-        {
-            camSpriteContainer.Clear();
-        }
+        camSpriteContainer.Clear();
 
         CamData camData = CamsManager.Singleton.EnumCamsDictionary[cam];
+        Sprite baseCamSprite = camData.emptyCam;
+        List<Sprite> animSprites = new();
 
         if (cam == CamEnum.PirateCove)
         {
@@ -166,61 +167,57 @@ public class GameUIManager : MonoBehaviour
             return;
         }
 
-        if (anims.Length > 0)
+        foreach (AnimSpriteData spriteData in camData.animSpriteDataArr)
         {
-            List<Sprite> animSprites = new();
-            List<int> animPriorities = new();
-
-            foreach (AnimatronicEnum anim in anims)
+            if (anims.Contains(spriteData.anim))
             {
-                if (camData.spritePriorityDictionary.ContainsKey(anim))
-                {
-                    int priority = camData.spritePriorityDictionary[anim];
+                animSprites.Add(spriteData.sprite);
+            }
+        }
 
-                    if (animSprites.Count == 0)
-                    {
-                        animSprites.Add(camData.occupiedSpriteDictionary[anim]);
-                        animPriorities.Add(priority);
-                        continue;
-                    }
-                    
-                    for (int i = 0; i < animSprites.Count; i++)
-                    {
-                        if (priority > animPriorities[i])
+        foreach (EventData e in events)
+        {
+            Sprite spriteRoll = e.EventRoll();
+
+            if (spriteRoll != null)
+            {
+                switch (e.eventType)
+                {
+                    case (EventType.Background):
+                        baseCamSprite = spriteRoll;
+                        break;
+                    case (EventType.Override):
+                        baseCamSprite = spriteRoll;
+                        return;
+                    case (EventType.Single):
+                        for (var i = 0; i < anims.Length; i++)
                         {
-                            animSprites.Insert(i, camData.occupiedSpriteDictionary[anim]);
-                            animPriorities.Insert(i, priority);
-                            continue;
+                            if (anims[i] == e.animsInvolved[0])
+                            {
+                                animSprites[i] = spriteRoll;
+                                break;
+                            }
                         }
-                    }
-
-                    animSprites.Add(camData.occupiedSpriteDictionary[anim]);
-                    animPriorities.Add(priority);
+                        break;
+                    default:
+                        Debug.LogError("GameUIManager: EventType in event " + e.eventName + " was invalid.");
+                        Debug.Break();
+                        break;
                 }
-                else
-                {
-                    Debug.LogError("GameUIManager: Anim " + anim + " not found in camData.spritePriorityDictionary.");
-                    Debug.Break();
-                }
-            }
-
-            foreach (Sprite sprite in animSprites)
-            {
-                Image animSprite = new()
-                {
-                    sprite = sprite,
-                    scaleMode = ScaleMode.ScaleToFit
-                };
-
-                camSpriteContainer.Add(animSprite);
             }
         }
 
-        if (events.Length > 0)
+        foreach (Sprite sprite in animSprites)
         {
-            // Handle events, not implemented yet
+            Image animSprite = new()
+            {
+                sprite = sprite,
+                scaleMode = ScaleMode.ScaleToFit
+            };
+
+            camSpriteContainer.Add(animSprite);
         }
 
-        camSprite.sprite = camData.emptyCam;
+        camSprite.sprite = baseCamSprite;
     }
 }

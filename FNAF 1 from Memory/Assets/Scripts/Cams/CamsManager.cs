@@ -36,7 +36,7 @@ public class CamsManager : MonoBehaviour
     public event Action<bool> OnCamFlip;
 
     // event will probably change when i get those working, int is foxy stages
-    public event Action<CamEnum, AnimatronicEnum[], Event[], int?> OnCamSwitch;
+    public event Action<CamEnum, AnimatronicEnum[], EventData[], int> OnCamSwitch;
 
     public void Awake()
     {
@@ -85,12 +85,19 @@ public class CamsManager : MonoBehaviour
             Debug.LogError("CamsManager: camsDataArr is null.");
             Debug.Break();
         }
+
+        currentCam = CamEnum.Stage;
     }
 
     public void FlipCam()
     {
         inCams = !inCams;
         Debug.Log("CameraFlip "  + inCams);
+
+        if (inCams)
+        {
+            SwitchCam(currentCam);
+        }
 
         OnCamFlip?.Invoke(inCams);
     }
@@ -106,14 +113,23 @@ public class CamsManager : MonoBehaviour
         currentCam = cam;
 
         var anims = new List<AnimatronicEnum>();
-        var foxyStage = (int?)null;
+        var events = new List<EventData>();
+        int foxyStage = AIManager.Singleton.foxyStage;
 
         if (cam == CamEnum.PirateCove)
         {
+            if (foxyStage < 0 || foxyStage > 3)
+            {
+                Debug.LogError("CamsManager: Invalid foxy stage.");
+                Debug.Break();
+            }
+
             AnimatronicEnum[] animEnum = foxyStage == 3 ? new AnimatronicEnum[] { } : new AnimatronicEnum[] { AnimatronicEnum.Foxy };
-            OnCamSwitch?.Invoke(cam, animEnum, null, foxyStage);
+            OnCamSwitch?.Invoke(cam, animEnum, new EventData[] { }, foxyStage);
             return;
         }
+
+        EventData[] baseEvents = EnumCamsDictionary[cam].events;
 
         foreach (AnimatronicEnum anim in AIManager.Singleton.AnimLocations.Keys)
         {
@@ -123,6 +139,37 @@ public class CamsManager : MonoBehaviour
             }
         }
 
-        OnCamSwitch?.Invoke(cam, anims.ToArray(), null, foxyStage);
+        foreach (EventData e in baseEvents)
+        {
+            if (e.animsInvolved.Length > 0)
+            {
+                if (e.animsInvolved.Length != e.animsInvolved.Length)
+                {
+                    continue;
+                }
+
+                for (int i = 0; i < e.animsInvolved.Length; i++)
+                {
+                    AnimatronicEnum anim = e.animsInvolved[i];
+
+                    if (anims.Contains(anim))
+                    {
+                        if (i == e.animsInvolved.Length - 1)
+                        {
+                            events.Add(e);
+                            break;
+                        }
+                        continue;
+                    }
+                    else
+                    {
+                        Debug.Log("CamsManager: Event " + e.eventName + " has animsInvolved that are not in the camera.");
+                        break;
+                    }
+                }
+            }
+        }
+
+        OnCamSwitch?.Invoke(cam, anims.ToArray(), events.ToArray(), foxyStage);
     }
 }

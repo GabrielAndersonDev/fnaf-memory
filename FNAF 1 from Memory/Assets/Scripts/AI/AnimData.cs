@@ -1,8 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AnimData", menuName = "Scriptable Objects/AnimData")]
 public abstract class AnimData : ScriptableObject
 {
+    public string animName;
+    public int animID;
     public AnimatronicEnum animatronic;
     public CamEnum startLocation;
     public CamEnum[] usableLocations;
