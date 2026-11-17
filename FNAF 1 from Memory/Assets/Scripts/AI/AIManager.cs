@@ -22,6 +22,12 @@ public class AIManager : MonoBehaviour
 
     public Dictionary<AnimatronicEnum, CamEnum> AnimLocations;
 
+    private Coroutine BonnieRoutine;
+    private Coroutine FreddyRoutine;
+    private Coroutine ChicaRoutine;
+    private Coroutine FoxyRoutine;
+    private Coroutine GFreddyRoutine;
+
     public int foxyStage;
 
     void Awake()
@@ -37,6 +43,11 @@ public class AIManager : MonoBehaviour
         }
 
         PopulateAnimLocations();
+    }
+
+    private void Update()
+    {
+        
     }
 
     void PopulateAnimLocations()
@@ -61,4 +72,6 @@ public class AIManager : MonoBehaviour
             Debug.Break();
         }
     }
+
+
 }

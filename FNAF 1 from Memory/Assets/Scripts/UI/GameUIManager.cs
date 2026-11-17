@@ -28,6 +28,9 @@ public class GameUIManager : MonoBehaviour
     [SerializeField]
     Sprite flipSprite;
 
+    [SerializeField]
+    Sprite camNavAsset;
+
     InputAction point;
 
     TextElement powerText;
@@ -38,7 +41,7 @@ public class GameUIManager : MonoBehaviour
 
     Image camSprite;
     Box camSpriteContainer;
-    Box camContainer;
+    Image camNavSprite;
 
     private void Awake()
     {
@@ -73,8 +76,9 @@ public class GameUIManager : MonoBehaviour
         currentCamText = camsUI.Q<TextElement>("cam-name");
         camSpriteContainer = camsUI.Q<Box>("cam-sprite-container");
         camSprite = camsUI.Q<Image>("cam-sprite");
+        camNavSprite = camsUI.Q<Image>("cam-nav-sprite");
 
-        camContainer = camsUI.Q<Box>("cam-container");
+        camNavSprite.sprite = camNavAsset;
 
         AddFlipElement();
         SetButtonControls();
@@ -130,17 +134,20 @@ public class GameUIManager : MonoBehaviour
     {
         foreach (CamData data in CamsManager.Singleton.camDataArr)
         {
+            string name = data.cam.ToString().ToLower().Replace(" ", "-") + "-btn";
+            Debug.Log(name);
+                
             Button button = new()
             {
-                name = data.CamName.ToLower().Replace(" ", "-") + "-btn " + data.camID,
+                name = data.cam.ToString().ToLower().Replace(" ", "-") + "-btn",
                 text = data.CamName
             };
 
             button.clicked += () => CamsManager.Singleton.SwitchCam(data.cam);
-            camContainer.Add(button);
+            camNavSprite.Add(button);
         }
 
-        if (camContainer.childCount < CamsManager.Singleton.camDataArr.Length)
+        if (camNavSprite.childCount < CamsManager.Singleton.camDataArr.Length)
         {
             Debug.LogError("GameUIManager: Not enough buttons for all cams.");
             Debug.Break();
@@ -158,6 +165,7 @@ public class GameUIManager : MonoBehaviour
         camSpriteContainer.Clear();
 
         CamData camData = CamsManager.Singleton.EnumCamsDictionary[cam];
+        currentCamText.text = camData.CamName;
         Sprite baseCamSprite = camData.emptyCam;
         List<Sprite> animSprites = new();
 

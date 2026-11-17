@@ -1,17 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FreddyData", menuName = "Scriptable Objects/FreddyData")]
 public class Freddy : AnimData
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    CamEnum killCam;
 
-    // Update is called once per frame
-    void Update()
+    public override IEnumerator AnimatronicRoutine(int difficulty)
     {
-        
+        return base.AnimatronicRoutine(difficulty);
     }
 }

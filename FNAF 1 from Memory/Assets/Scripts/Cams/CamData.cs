@@ -18,6 +18,8 @@ public class CamData : ScriptableObject
     public CamEnum cam;
     public Sprite emptyCam;
 
+    public CamEnum[] connectedCams;
+
     public AnimSpriteData[] animSpriteDataArr;
 
     public Sprite[] foxySprites;

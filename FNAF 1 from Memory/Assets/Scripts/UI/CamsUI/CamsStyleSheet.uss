@@ -36,17 +36,12 @@
 	position: absolute;
 }
 
-#cam-layout-sprite {
-	position: absolute;
-	opacity: 0;
-}
-
 #cams {
-	width: 45%;
-	height: 45%;
+	width: 50%;
+	height: 50%;
 }
 
-#cam-container {
+#cam-nav-sprite {
 	align-content: center;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -54,8 +49,59 @@
 }
 
 #cams Button {
-	display: flex;
-	flex: 20%;
-	max-height: 20%;
-	border-color: rgba(0, 0, 0, 1);
+	color: rgba(93, 255, 205, 1);
+	border-color: rgba(93, 255, 205, 1);
+	position: relative;
+	width: 13.125%;
+	height: 15.833%;
 }
+
+/* #bathroom-btn {
+	left: 1064px;
+	top: 37px;
+}
+
+#four-b-btn {
+	left: 1308px;
+	top: 889px;
+}
+
+#janitor {
+	left: 809px;
+	top: 880px;
+}
+
+#kitchen {
+	left: 1520px;
+	top: 210px;
+}
+
+#l-hallway-btn {
+	left: 809px;
+	top: 676px;
+}
+
+#parts-service-btn {
+	left: 670px;
+	top: 180px;
+}
+
+#party-btn {
+	left: 1051px;
+	top: 380px;
+}
+
+#pirate-cove-btn {
+	left: 591px;
+	top: 415px;
+}
+
+#r-hallway-btn {
+	left: 1311px;
+	top: 678px;
+}
+
+#stage-btn {
+	left: 1064px;
+	top: 37px;
+} */
