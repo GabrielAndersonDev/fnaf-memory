@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
+using System.Collections;
 using System.Collections.Generic;
 
 public class GameUIManager : MonoBehaviour
@@ -31,8 +32,6 @@ public class GameUIManager : MonoBehaviour
     [SerializeField]
     Sprite camNavAsset;
 
-    InputAction point;
-
     TextElement powerText;
     Box powerUseSpriteContainer;
     TextElement hourText;
@@ -42,6 +41,15 @@ public class GameUIManager : MonoBehaviour
     Image camSprite;
     Box camSpriteContainer;
     Image camNavSprite;
+
+    [SerializeField]
+    private AnimatronicEnum[] animList;
+    [SerializeField]
+    private Animation[] jumpscareList;
+    Dictionary<AnimatronicEnum, Animation> AnimJumpscareDictionary;
+
+    [SerializeField]
+    private Animation[] freddyOutageAnim;
 
     private void Awake()
     {
@@ -59,6 +67,7 @@ public class GameUIManager : MonoBehaviour
     void Start()
     {
         InitUI();
+        InitAnimJumpDictionary();
     }
 
     public void InitUI()
@@ -89,6 +98,33 @@ public class GameUIManager : MonoBehaviour
         CamFlipUIToggle(CamsManager.Singleton.inCams);
 
         CamsManager.Singleton.OnCamSwitch += UpdateCamUI;
+
+        UpdatePower(100);
+        PowerManager.Singleton.Power += UpdatePower;
+
+        UpdateHour(12);
+        NightManager.Singleton.HourChange += UpdateHour;
+
+        GameManager.Singleton.KillPlayer += OnGameEnd;
+        GameManager.Singleton.NightWin += OnGameEnd;
+    }
+
+    private void InitAnimJumpDictionary()
+    {
+        AnimJumpscareDictionary = new();
+
+        for (var i = 0; i < animList.Count(); i++)
+        {
+            try
+            {
+                AnimJumpscareDictionary.Add(animList[i], jumpscareList[i]);
+            }
+            catch
+            {
+                Debug.LogError("GameUIManager: Error when initializing AnimJumpDictionary.");
+                Debug.Break();
+            }
+        }
     }
 
     void AddFlipElement()
@@ -105,6 +141,12 @@ public class GameUIManager : MonoBehaviour
     private void OnDisable()
     {
         flipContainer.UnregisterCallback<PointerEnterEvent>(FlipPointerEnter);
+        CamsManager.Singleton.OnCamFlip -= CamFlipUIToggle;
+        CamsManager.Singleton.OnCamSwitch -= UpdateCamUI;
+        PowerManager.Singleton.Power -= UpdatePower;
+        NightManager.Singleton.HourChange -= UpdateHour;
+        GameManager.Singleton.KillPlayer -= OnGameEnd;
+        GameManager.Singleton.NightWin -= OnGameEnd;
     }
 
     private void FlipPointerEnter(PointerEnterEvent evt)
@@ -135,7 +177,6 @@ public class GameUIManager : MonoBehaviour
         foreach (CamData data in CamsManager.Singleton.camDataArr)
         {
             string name = data.cam.ToString().ToLower().Replace(" ", "-") + "-btn";
-            Debug.Log(name);
                 
             Button button = new()
             {
@@ -172,6 +213,15 @@ public class GameUIManager : MonoBehaviour
         if (cam == CamEnum.PirateCove)
         {
             camSprite.sprite = camData.foxySprites[foxyStage];
+            return;
+        }
+
+        if (cam == CamEnum.LHallway
+            && anims.Contains(AnimatronicEnum.Foxy))
+        {
+            camSprite.sprite = baseCamSprite;
+
+            Debug.LogError("Play Foxy running anim, unimplemented rn");
             return;
         }
 
@@ -227,5 +277,41 @@ public class GameUIManager : MonoBehaviour
         }
 
         camSprite.sprite = baseCamSprite;
+    }
+
+    private void UpdatePower(int newPower) 
+    {
+        powerText.text = newPower.ToString();
+    }
+
+    private void UpdateHour(int newHour)
+    {
+        hourText.text = newHour.ToString();
+    }
+
+    public void PlayJumpscare(AnimatronicEnum anim, bool isCamUp)
+    {
+        Debug.Log("You just got JUMPSCARED!!! LOSER!!!!");
+
+        if (isCamUp)
+        {
+            // pull cam down forcefully
+            CamsManager.Singleton.FlipCam();
+        }
+
+        // play jumpscare
+
+        // end game
+        GameManager.Singleton.OnKillPlayer();
+    }
+
+    private void OnGameEnd()
+    {
+        CamsManager.Singleton.OnCamFlip -= CamFlipUIToggle;
+        CamsManager.Singleton.OnCamSwitch -= UpdateCamUI;
+        PowerManager.Singleton.Power -= UpdatePower;
+        NightManager.Singleton.HourChange -= UpdateHour;
+        GameManager.Singleton.KillPlayer -= OnGameEnd;
+        GameManager.Singleton.NightWin -= OnGameEnd;
     }
 }

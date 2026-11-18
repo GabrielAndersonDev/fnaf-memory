@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,14 +15,19 @@ public class OfficeManager : MonoBehaviour
     public event Action<bool> LLightBtn;
     public event Action<bool> RLightBtn;
 
-    public bool isLDoorOpen;
-    public bool isRDoorOpen;
+    public bool isLDoorClosed;
+    public bool isRDoorClosed;
 
     public bool isLLightOn;
     public bool isRLightOn;
 
     public bool isLDoorBtnDisabled;
     public bool isRDoorBtnDisabled;
+
+    [SerializeField]
+    SpriteRenderer officeSprite;
+    [SerializeField]
+    Sprite outageOffice;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -35,8 +41,17 @@ public class OfficeManager : MonoBehaviour
         {
             Singleton = this;
         }
+    }
 
+    private void Start()
+    {
         playerInput = GetComponent<PlayerInput>();
+        PowerManager.Singleton.PowerOutage += OnOutage;
+    }
+
+    private void OnDisable()
+    {
+        PowerManager.Singleton.PowerOutage -= OnOutage;
     }
 
     // mouse position set
@@ -70,5 +85,21 @@ public class OfficeManager : MonoBehaviour
         {
             //move sprite/cam POV here
         }
+    }
+
+    private void OnOutage()
+    {
+        // Play outage animation (opening doors)
+
+        officeSprite.sprite = outageOffice;
+    }
+
+    public IEnumerator FreddyOutageAnim(float time, int freddyStage)
+    {
+        WaitForSeconds waitTime = new(time);
+
+        Debug.LogError("OfficeManager: FreddyOutageAnim is still unimplemented");
+
+        yield return waitTime;
     }
 }

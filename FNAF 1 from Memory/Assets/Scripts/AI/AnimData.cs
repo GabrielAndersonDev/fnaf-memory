@@ -7,6 +7,8 @@ using UnityEngine;
 
 public abstract class AnimData : ScriptableObject
 {
+    public readonly static WaitForSeconds waitForSeconds5 = new(5f);
+
     public string animName;
     public int animID;
     public AnimatronicEnum animatronic;
@@ -14,14 +16,23 @@ public abstract class AnimData : ScriptableObject
     public CamEnum returnLocation;
     public CamEnum[] usableLocations;
 
+    public int difficulty;
+
     // may not be right type, will have to check when implementing
     public AnimationEvent jumpscare;
 
-    public virtual IEnumerator AnimatronicRoutine(int difficulty)
+    public virtual void InitAnim(int dif)
     {
-        while (NightManager.Singleton.isNightOver)
+        difficulty = dif;
+    }
+
+    public virtual IEnumerator AnimatronicRoutine()
+    {
+        while (!NightManager.Singleton.isNightOver)
         {
-            yield return new WaitForSeconds(5f);
+            yield return waitForSeconds5;
+
+            Debug.Log("Animatronic " + animName + " coroutine is running!");
 
             int rand = Random.Range(1, 20);
 
@@ -45,8 +56,10 @@ public abstract class AnimData : ScriptableObject
                 Debug.Break();
                 break;
             case CamEnum.LDoor:
-                if (OfficeManager.Singleton.isLDoorOpen)
+                Debug.Log("Running left door:");
+                if (!OfficeManager.Singleton.isLDoorClosed)
                 {
+                    Debug.Log("Left door is open on movement opportunity");
                     if (CamsManager.Singleton.inCams)
                     {
                         AIManager.Singleton.UpdateAnimLocation(animatronic, CamEnum.Office);
@@ -63,7 +76,7 @@ public abstract class AnimData : ScriptableObject
                 }
                 break;
             case CamEnum.RDoor:
-                if (OfficeManager.Singleton.isRDoorOpen)
+                if (!OfficeManager.Singleton.isRDoorClosed)
                 {
                     if (CamsManager.Singleton.inCams)
                     {
@@ -103,16 +116,13 @@ public abstract class AnimData : ScriptableObject
         }
     }
 
-    public virtual void Jumpscare(bool camUp)
+    public virtual void Jumpscare(bool isCamUp)
     {
-        if (camUp)
-        {
-            // Play cam pull down + jumpscare
-        }
-        else
-        {
-            // Just jumpscare
-        }
-        Debug.LogError("Jumpscare is unimplemented pensive");
+        GameUIManager.Singleton.PlayJumpscare(animatronic, isCamUp);
+    }
+
+    public virtual IEnumerator FreddyOutage()
+    {
+        yield return null;
     }
 }

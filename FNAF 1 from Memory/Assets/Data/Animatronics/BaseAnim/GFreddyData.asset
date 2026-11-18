@@ -16,4 +16,6 @@ MonoBehaviour:
   animID: 4
   animatronic: 4
   startLocation: 2
+  returnLocation: 2
   usableLocations: 020000000a000000
+  difficulty: 0

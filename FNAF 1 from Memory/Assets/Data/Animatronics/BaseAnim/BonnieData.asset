@@ -16,4 +16,6 @@ MonoBehaviour:
   animID: 0
   animatronic: 0
   startLocation: 9
+  returnLocation: 7
   usableLocations: 0100000002000000040000000600000007000000090000000b0000000a000000
+  difficulty: 11

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // controls the game from main menu to gameplay
@@ -11,8 +12,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     AnimDifficulty[] defaultDifficulties;
 
-    [SerializeField]
-    AnimData[] animatronics;
+    public event Action KillPlayer;
+    public event Action NightWin;
+
+    public bool isGameOver;
 
     public void Awake()
     {
@@ -26,25 +29,47 @@ public class GameManager : MonoBehaviour
             Singleton = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        // only here temporarily
     }
 
-    void InitGame()
+    private void Start()
     {
-
+        StartGame();
     }
 
     public void StartGame()
     {
-
+        // Function for swapping scenes to gaameplay and taking in night and difficulty info
+        InitGame();
     }
 
-    public void SwitchCam()
+    void InitGame()
     {
+        if (night == 7)
+        {
+            Debug.LogError("Night seven info not set up yet.");
+            Debug.Break();
+        }
+        else
+        {
+            AIManager.Singleton.animDifficulty = defaultDifficulties[night - 1];
+        }
 
+        CamsManager.Singleton.PopulateCamDictionary();
+        AIManager.Singleton.InitAIManager();
     }
 
-    public void KillPlayer()
+    public void OnKillPlayer()
     {
+        Debug.LogError("Player was killed, uniplemented");
+        isGameOver = true;
+        KillPlayer.Invoke();
+    }
 
+    public void OnNightWin()
+    {
+        isGameOver = true;
+        NightWin.Invoke();
     }
 }

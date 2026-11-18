@@ -16,7 +16,7 @@ MonoBehaviour:
   CamName: Party
   cam: 7
   emptyCam: {fileID: 3267077627818543493, guid: d29c0ee352af6dc4faa9e80777b393b6, type: 3}
-  connectedCams: 0000000004000000050000000300000009000000
+  connectedCams: 00000000050000000300000004000000
   animSpriteDataArr:
   - anim: 1
     sprite: {fileID: 21300000, guid: c8ca4c71851412b459e68d726c10948f, type: 3}

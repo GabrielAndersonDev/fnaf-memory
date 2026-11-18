@@ -49,11 +49,9 @@ public class CamsManager : MonoBehaviour
         {
             Singleton = this;
         }
-
-        PopulateCamDictionary();
     }
 
-    void PopulateCamDictionary()
+    public void PopulateCamDictionary()
     {
         if (camDataArr != null)
         {
@@ -104,6 +102,7 @@ public class CamsManager : MonoBehaviour
 
     public void SwitchCam(CamEnum cam)
     {
+        Debug.Log("Switching to cam: " + cam);
         if (cam == CamEnum.Invalid || cam == CamEnum.None)
         {
             Debug.LogError("CamsManager: Invalid cam switch attempted.");
@@ -118,13 +117,13 @@ public class CamsManager : MonoBehaviour
 
         if (cam == CamEnum.PirateCove)
         {
-            if (foxyStage < 0 || foxyStage > 3)
+            if (foxyStage < 0 || foxyStage > 4)
             {
                 Debug.LogError("CamsManager: Invalid foxy stage.");
                 Debug.Break();
             }
 
-            AnimatronicEnum[] animEnum = foxyStage == 3 ? new AnimatronicEnum[] { } : new AnimatronicEnum[] { AnimatronicEnum.Foxy };
+            AnimatronicEnum[] animEnum = foxyStage == 4 ? new AnimatronicEnum[] { } : new AnimatronicEnum[] { AnimatronicEnum.Foxy };
             OnCamSwitch?.Invoke(cam, animEnum, new EventData[] { }, foxyStage);
             return;
         }

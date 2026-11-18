@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,6 +6,9 @@ public class NightManager : MonoBehaviour
 {
     public static NightManager Singleton { get; private set; }
     public int Hour { get;  private set; }
+    private static WaitForSeconds waitForSeconds80 = new(80f);
+
+    public event Action<int> HourChange;
 
     public bool isNightOver;
 
@@ -36,14 +40,21 @@ public class NightManager : MonoBehaviour
                 WinNight();
             }
 
-            yield return new WaitForSeconds(80f);
+            yield return waitForSeconds80;
             Hour = Hour == 12 ? 1 : Hour++;
+            HourChange.Invoke(Hour);
         }
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     private void WinNight()
     {
         isNightOver = true;
         Debug.Log("You won! Not implemented yet.");
+        GameManager.Singleton.OnNightWin();
     }
 }
