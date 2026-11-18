@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,6 +30,7 @@ public class AIManager : MonoBehaviour
     private Coroutine FreddyRoutine;
     private Coroutine ChicaRoutine;
     private Coroutine FoxyRoutine;
+    private Coroutine FoxyRunRoutine;
     private Coroutine GFreddyRoutine;
 
     public int foxyStage;
@@ -117,6 +119,11 @@ public class AIManager : MonoBehaviour
             Debug.LogError($"AIManager: AnimLocations does not contain {anim}.");
             Debug.Break();
         }
+    }
+
+    public void RunFoxyCoroutine(IEnumerator routine)
+    {
+        FoxyRunRoutine ??= StartCoroutine(routine);
     }
 
     private void OnOutage()
