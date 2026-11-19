@@ -3,9 +3,10 @@
     <ui:VisualElement name="root">
         <ui:Image name="cam-border" src="">
             <ui:Image name="cam-sprite" src="">
-                <ui:Box name="cam-sprite-container"/>
-                <ui:Box name="cam-name-box">
-                    <ui:TextElement name="cam-name" text="CurrentCam"/>
+                <ui:Box name="cam-sprite-container">
+                </ui:Box>
+                <ui:Box name="cam-name-box" picking-mode="Ignore">
+                    <ui:TextElement name="cam-name" text="CurrentCam" picking-mode="Ignore" />
                 </ui:Box>
                 <ui:Box name="main">
                     <ui:Box name="cams">

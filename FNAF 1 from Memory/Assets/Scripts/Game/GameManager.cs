@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 // controls the game from main menu to gameplay
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager Singleton { get; private set; }
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     public event Action NightWin;
 
     public bool isGameOver;
+
+    public InputSystemUIInputModule inputSystem;
 
     public void Awake()
     {
@@ -31,6 +34,16 @@ public class GameManager : MonoBehaviour
         }
 
         // only here temporarily
+    }
+
+    private void OnEnable()
+    {
+        inputSystem.actionsAsset.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputSystem.actionsAsset.Disable();
     }
 
     private void Start()

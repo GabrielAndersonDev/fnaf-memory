@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
 public class OfficeManager : MonoBehaviour
 {
     public static OfficeManager Singleton { get; private set; }

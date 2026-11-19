@@ -285,6 +285,9 @@ GameObject:
   m_Component:
   - component: {fileID: 323251372}
   - component: {fileID: 323251371}
+  - component: {fileID: 323251374}
+  - component: {fileID: 323251373}
+  - component: {fileID: 323251375}
   m_Layer: 0
   m_Name: TempGameManager
   m_TagString: Untagged
@@ -304,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c88fcdbc359fb43b766d64366b3dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  night: 4
+  night: 1
   defaultDifficulties:
   - {fileID: 11400000, guid: a7aa52fe5272561418f64fe9bbefc6d8, type: 2}
   - {fileID: 11400000, guid: 70a3311cfc9f24c46ac5434362a8df94, type: 2}
@@ -312,6 +315,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 10e4054633d33204da9eb02fcc8e1509, type: 2}
   - {fileID: 11400000, guid: dc6b9ab1f92f9c14fab359ff50311528, type: 2}
   - {fileID: 11400000, guid: 1acc74730f53ead48a6afc849a7e9707, type: 2}
+  isGameOver: 0
+  inputSystem: {fileID: 323251373}
 --- !u!4 &323251372
 Transform:
   m_ObjectHideFlags: 0
@@ -327,6 +332,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &323251373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323251370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.UI.InputSystemUIInputModule
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 6d3a7efd24160e144a6d2d3f383200f6, type: 3}
+  m_PointAction: {fileID: -3066091494659192671, guid: 6d3a7efd24160e144a6d2d3f383200f6, type: 3}
+  m_MoveAction: {fileID: -5630151704836100654, guid: 6d3a7efd24160e144a6d2d3f383200f6, type: 3}
+  m_SubmitAction: {fileID: 0}
+  m_CancelAction: {fileID: 0}
+  m_LeftClickAction: {fileID: 1781555164194001046, guid: 6d3a7efd24160e144a6d2d3f383200f6, type: 3}
+  m_MiddleClickAction: {fileID: 0}
+  m_RightClickAction: {fileID: 0}
+  m_ScrollWheelAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
+--- !u!114 &323251374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323251370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &323251375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323251370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19106, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.PanelInputConfiguration
+  m_Settings:
+    m_ProcessWorldSpaceInput: 1
+    m_InteractionLayers:
+      serializedVersion: 2
+      m_Bits: 59
+    m_MaxInteractionDistance: Infinity
+    m_DefaultEventCameraIsMainCamera: 1
+    m_EventCameras: []
+    m_PanelInputRedirection: 0
+    m_AutoCreatePanelComponents: 1
 --- !u!1 &368553868
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +455,6 @@ GameObject:
   m_Component:
   - component: {fileID: 405938786}
   - component: {fileID: 405938787}
-  - component: {fileID: 405938788}
   m_Layer: 0
   m_Name: OfficeManager
   m_TagString: Untagged
@@ -418,57 +490,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a8587fc6042264c839431ba8a72e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OfficeManager
-  playerInput: {fileID: 405938788}
-  isLDoorOpen: 0
-  isRDoorOpen: 0
+  playerInput: {fileID: 0}
+  isLDoorClosed: 0
+  isRDoorClosed: 0
   isLLightOn: 0
   isRLightOn: 0
   isLDoorBtnDisabled: 0
   isRDoorBtnDisabled: 0
   officeSprite: {fileID: 2037943992}
   outageOffice: {fileID: 3267077627818543493, guid: d29c0ee352af6dc4faa9e80777b393b6, type: 3}
---- !u!114 &405938788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405938785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
-    m_ActionName: 'Player/Look[/Mouse/delta,/Pen/delta]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
-    m_ActionName: 'Player/Interact[/Mouse/press]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: dc7a4514-0305-49ff-8906-f0df54396681
-    m_ActionName: 'Player/Point[/Mouse/position,/Pen/position]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 816174217}
 --- !u!1 &463783716
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,8 +616,6 @@ GameObject:
   m_Component:
   - component: {fileID: 680875408}
   - component: {fileID: 680875409}
-  - component: {fileID: 680875412}
-  - component: {fileID: 680875411}
   m_Layer: 0
   m_Name: GameUIManager
   m_TagString: Untagged
@@ -634,52 +662,6 @@ MonoBehaviour:
   animList: 
   jumpscareList: []
   freddyOutageAnim: []
---- !u!114 &680875411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680875407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.UI.InputSystemUIInputModule
-  m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_PointAction: {fileID: -3066091494659192671, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_MoveAction: {fileID: 0}
-  m_SubmitAction: {fileID: 0}
-  m_CancelAction: {fileID: 0}
-  m_LeftClickAction: {fileID: 0}
-  m_MiddleClickAction: {fileID: 0}
-  m_RightClickAction: {fileID: 0}
-  m_ScrollWheelAction: {fileID: 0}
-  m_TrackedDevicePositionAction: {fileID: 0}
-  m_TrackedDeviceOrientationAction: {fileID: 0}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
-  m_ScrollDeltaPerTick: 6
---- !u!114 &680875412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680875407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!1 &816174215
 GameObject:
   m_ObjectHideFlags: 0

@@ -111,7 +111,21 @@ public class AIManager : MonoBehaviour
     {
         if (AnimLocations.ContainsKey(anim))
         {
+            CamEnum prevLocation = AnimLocations[anim];
             AnimLocations[anim] = newLocation;
+
+            if (CamsManager.Singleton.inCams)
+            {
+                CamEnum currentCam = CamsManager.Singleton.currentCam;
+
+                if (currentCam == newLocation
+                    || currentCam == prevLocation)
+                {
+                    // play shitrate effect
+                    CamsManager.Singleton.SwitchCam(currentCam);
+                }
+            }
+
             Debug.Log("Animatronic " + anim + " is now at " + newLocation);
         }
         else

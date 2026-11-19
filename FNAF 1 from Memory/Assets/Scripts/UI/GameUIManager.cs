@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -177,7 +178,7 @@ public class GameUIManager : MonoBehaviour
         foreach (CamData data in CamsManager.Singleton.camDataArr)
         {
             string name = data.cam.ToString().ToLower().Replace(" ", "-") + "-btn";
-                
+            
             Button button = new()
             {
                 name = data.cam.ToString().ToLower().Replace(" ", "-") + "-btn",
@@ -185,6 +186,8 @@ public class GameUIManager : MonoBehaviour
             };
 
             button.clicked += () => CamsManager.Singleton.SwitchCam(data.cam);
+            button.clicked += () => Debug.Log("Button " + button.name + "pressed");
+            button.pickingMode = PickingMode.Position;
             camNavSprite.Add(button);
         }
 
@@ -270,7 +273,8 @@ public class GameUIManager : MonoBehaviour
             Image animSprite = new()
             {
                 sprite = sprite,
-                scaleMode = ScaleMode.ScaleToFit
+                scaleMode = ScaleMode.ScaleToFit,
+                pickingMode = PickingMode.Ignore
             };
 
             camSpriteContainer.Add(animSprite);

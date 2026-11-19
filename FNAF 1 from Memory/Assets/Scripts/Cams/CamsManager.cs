@@ -32,6 +32,7 @@ public class CamsManager : MonoBehaviour
 
     public CamEnum currentCam;
     public bool inCams;
+    private bool isCamsDisabled;
 
     public event Action<bool> OnCamFlip;
 
@@ -49,6 +50,18 @@ public class CamsManager : MonoBehaviour
         {
             Singleton = this;
         }
+
+        isCamsDisabled = false;
+    }
+
+    private void Start()
+    {
+        PowerManager.Singleton.PowerOutage += OnOutage;
+    }
+
+    private void OnDisable()
+    {
+        PowerManager.Singleton.PowerOutage -= OnOutage;
     }
 
     public void PopulateCamDictionary()
@@ -89,6 +102,11 @@ public class CamsManager : MonoBehaviour
 
     public void FlipCam()
     {
+        if (isCamsDisabled)
+        {
+            return;
+        }
+
         inCams = !inCams;
         Debug.Log("CameraFlip "  + inCams);
 
@@ -170,5 +188,15 @@ public class CamsManager : MonoBehaviour
         }
 
         OnCamSwitch?.Invoke(cam, anims.ToArray(), events.ToArray(), foxyStage);
+    }
+
+    private void OnOutage()
+    {
+        if (inCams)
+        {
+            FlipCam();
+        }
+
+        isCamsDisabled = true;
     }
 }
