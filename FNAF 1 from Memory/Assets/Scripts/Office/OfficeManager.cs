@@ -1,18 +1,17 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class OfficeManager : MonoBehaviour
 {
     public static OfficeManager Singleton { get; private set; }
-    public PlayerInput playerInput;
 
-    public event Action<bool> LDoorBtn;
-    public event Action<bool> RDoorBtn;
+    [SerializeField]
+    BtnController[] buttons;
 
-    public event Action<bool> LLightBtn;
-    public event Action<bool> RLightBtn;
+    public event Action<bool, bool, bool> BtnPressed;
 
     public bool isLDoorClosed;
     public bool isRDoorClosed;
@@ -24,9 +23,32 @@ public class OfficeManager : MonoBehaviour
     public bool isRDoorBtnDisabled;
 
     [SerializeField]
+    Sprite lightNormalBtn;
+    [SerializeField]
+    Sprite lightPressedBtn;
+    [SerializeField]
+    Sprite doorNormalBtn;
+    [SerializeField]
+    Sprite doorPressedBtn;
+
+    [SerializeField]
     SpriteRenderer officeSprite;
     [SerializeField]
     Sprite outageOffice;
+
+    [SerializeField]
+    Camera mainCamera;
+
+    [SerializeField]
+    float baseSpeed;
+
+    float maxMoveDistanceX;
+
+    InputAction point;
+    InputAction interact;
+    InputAction look;
+
+    Vector2 mousePos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -44,8 +66,63 @@ public class OfficeManager : MonoBehaviour
 
     private void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
+        point = GameManager.Singleton.inputSystem.point;
+        interact = GameManager.Singleton.inputSystem.leftClick;
+        look = GameManager.Singleton.inputSystem.move;
+
         PowerManager.Singleton.PowerOutage += OnOutage;
+
+        AssignButtons();
+    }
+
+    private void AssignButtons()
+    {
+        foreach (BtnController btn in buttons)
+        {
+            Sprite pressed;
+            Sprite normal;
+
+            pressed = btn.isLight ? lightPressedBtn : doorPressedBtn;
+            normal = btn.isLight ? lightNormalBtn : doorNormalBtn;
+
+            btn.InitBtn(pressed, normal);
+        }
+    }
+
+    public void ButtonPressed(bool isLeft, bool isLight, bool isPressed)
+    {
+        if (isLeft)
+        {
+            if (isLight)
+            {
+                isLLightOn = isPressed;
+            }
+            else
+            {
+                isLDoorClosed = isPressed;
+            }
+        }
+        else
+        {
+            if (isLight)
+            {
+                isRLightOn = isPressed;
+            }
+            else
+            {
+                isRDoorClosed = isPressed;
+            }
+        }
+    }
+
+    private void CalcSpriteWidth()
+    {
+        float spriteWidth = officeSprite.bounds.size.x;
+
+        float camHeight = mainCamera.orthographicSize * 2f;
+        float camWidth = camHeight * mainCamera.aspect;
+
+        maxMoveDistanceX = Mathf.Abs((spriteWidth - camWidth) / 2);
     }
 
     private void OnDisable()
@@ -61,30 +138,52 @@ public class OfficeManager : MonoBehaviour
             return;
         }
 
-        Vector2 mousePos = Mouse.current.position.ReadValue();
+        mousePos = point.ReadValue<Vector2>();
+        CalcSpriteWidth();
+        MouseScreenCheck();
     }
 
-    void MouseScreenCheck(Vector2 mousePos)
+    void MouseScreenCheck()
     {
-        float baseSpeed = 1;
+        if (CamsManager.Singleton.inCams)
+        {
+            return;
+        }
 
-        float screenDif = (float)(Screen.width * 0.2);
+        float minLeftPos = (float)(Screen.width * 0.2);
+        float minRightPos = (float)Screen.width - minLeftPos;
 
-        float minLeftPos = screenDif;
-        float minRightPos = (float)Screen.width - screenDif;
+        float transformSpeed;
+
 
         // check left
-        if (mousePos.x <= minLeftPos)
-        {   
-            // move sprite/cam POV here
+        if (mousePos.x <= minLeftPos
+            && officeSprite.gameObject.transform.position.x < maxMoveDistanceX)
+        {
+            transformSpeed = baseSpeed * Mathf.Abs(mousePos.x - minLeftPos);
+            officeSprite.gameObject.transform.Translate(transformSpeed * Time.deltaTime, 0, 0);
         }
 
         // check right
-        if (mousePos.x >= minRightPos)
+        if (mousePos.x >= minRightPos
+            && officeSprite.gameObject.transform.position.x > -maxMoveDistanceX)
         {
-            //move sprite/cam POV here
+            transformSpeed = baseSpeed * (mousePos.x - minRightPos);
+            officeSprite.gameObject.transform.Translate(-transformSpeed * Time.deltaTime, 0, 0);
+        }
+
+        if (officeSprite.gameObject.transform.position.x > maxMoveDistanceX)
+        {
+            officeSprite.gameObject.transform.position = new Vector3(maxMoveDistanceX, 0, 0);
+        }
+
+        if (officeSprite.gameObject.transform.position.x < -maxMoveDistanceX)
+        {
+            officeSprite.gameObject.transform.position = new Vector3(-maxMoveDistanceX, 0, 0);
         }
     }
+
+
 
     private void OnOutage()
     {

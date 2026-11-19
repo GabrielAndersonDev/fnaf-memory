@@ -102,6 +102,7 @@ public class GameUIManager : MonoBehaviour
 
         UpdatePower(100);
         PowerManager.Singleton.Power += UpdatePower;
+        PowerManager.Singleton.PowerOutage += OnOutage;
 
         UpdateHour(12);
         NightManager.Singleton.HourChange += UpdateHour;
@@ -145,6 +146,7 @@ public class GameUIManager : MonoBehaviour
         CamsManager.Singleton.OnCamFlip -= CamFlipUIToggle;
         CamsManager.Singleton.OnCamSwitch -= UpdateCamUI;
         PowerManager.Singleton.Power -= UpdatePower;
+        PowerManager.Singleton.PowerOutage -= OnOutage;
         NightManager.Singleton.HourChange -= UpdateHour;
         GameManager.Singleton.KillPlayer -= OnGameEnd;
         GameManager.Singleton.NightWin -= OnGameEnd;
@@ -307,6 +309,12 @@ public class GameUIManager : MonoBehaviour
 
         // end game
         GameManager.Singleton.OnKillPlayer();
+    }
+
+    private void OnOutage()
+    {
+        baseGameUI.SetEnabled(false);
+        baseGameUI.style.display = DisplayStyle.None;
     }
 
     private void OnGameEnd()
