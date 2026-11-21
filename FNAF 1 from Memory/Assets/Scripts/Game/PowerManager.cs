@@ -87,18 +87,15 @@ public class PowerManager : MonoBehaviour
 
     private void OnDisable()
     {
-        OfficeManager.Singleton.LDoorBtn -= InUseChange;
-        OfficeManager.Singleton.LLightBtn -= InUseChange;
-        OfficeManager.Singleton.RDoorBtn -= InUseChange;
-        OfficeManager.Singleton.RLightBtn -= InUseChange;
+        OfficeManager.Singleton.BtnPressed -= InUseChange;
         CamsManager.Singleton.OnCamFlip -= InUseChange;
         GameManager.Singleton.KillPlayer -= OnGameEnd;
         GameManager.Singleton.NightWin -= OnGameEnd;
     }
 
-    private void InUseChange(bool isAdded)
+    private void InUseChange(bool isLeft, bool isLight, bool isPressed)
     {
-        if (isAdded)
+        if (isPressed)
         {
             inUseCount++;
         }
@@ -124,10 +121,7 @@ public class PowerManager : MonoBehaviour
     private void OnGameEnd()
     {
 
-        OfficeManager.Singleton.LDoorBtn -= InUseChange;
-        OfficeManager.Singleton.LLightBtn -= InUseChange;
-        OfficeManager.Singleton.RDoorBtn -= InUseChange;
-        OfficeManager.Singleton.RLightBtn -= InUseChange;
+        OfficeManager.Singleton.BtnPressed -= InUseChange;
         CamsManager.Singleton.OnCamFlip -= InUseChange;
     }
 }
