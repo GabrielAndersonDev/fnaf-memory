@@ -74,7 +74,7 @@ public class Foxy : AnimData
 
     private void FoxyDoorCheck()
     {
-        if (!OfficeManager.Singleton.isLDoorClosed)
+        if (!OfficeManager.Singleton.leftDoor.isClosed)
         {
             Jumpscare(CamsManager.Singleton.inCams);
         }

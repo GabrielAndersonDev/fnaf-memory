@@ -13,11 +13,8 @@ public class OfficeManager : MonoBehaviour
 
     public event Action<bool, bool, bool> BtnPressed;
 
-    public bool isLDoorClosed;
-    public bool isRDoorClosed;
-
-    public bool isLLightOn;
-    public bool isRLightOn;
+    public DoorController leftDoor;
+    public DoorController rightDoor;
 
     public bool isLDoorBtnDisabled;
     public bool isRDoorBtnDisabled;
@@ -48,8 +45,6 @@ public class OfficeManager : MonoBehaviour
     InputAction interact;
     InputAction look;
 
-    Vector2 mousePos;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -71,9 +66,30 @@ public class OfficeManager : MonoBehaviour
         look = GameManager.Singleton.inputSystem.move;
 
         PowerManager.Singleton.PowerOutage += OnOutage;
+        //interact.performed += ClickCheckUwU;
 
         AssignButtons();
     }
+
+    // temporary for btn testing
+    //private void ClickCheckUwU(InputAction.CallbackContext context)
+    //{
+    //    if (context.ReadValue<float>() == 0f)
+    //    {
+    //        Ray ray = Camera.main.ScreenPointToRay(GameManager.Singleton.mousePos);
+    //        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+
+    //        if (hit.collider != null)
+    //        {
+    //            GameObject clickedObj = hit.collider.gameObject;
+    //            Debug.Log(clickedObj.name);
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("Hitting object without collider");
+    //        }
+    //    }
+    //}
 
     private void AssignButtons()
     {
@@ -91,28 +107,7 @@ public class OfficeManager : MonoBehaviour
 
     public void ButtonPressed(bool isLeft, bool isLight, bool isPressed)
     {
-        if (isLeft)
-        {
-            if (isLight)
-            {
-                isLLightOn = isPressed;
-            }
-            else
-            {
-                isLDoorClosed = isPressed;
-            }
-        }
-        else
-        {
-            if (isLight)
-            {
-                isRLightOn = isPressed;
-            }
-            else
-            {
-                isRDoorClosed = isPressed;
-            }
-        }
+        BtnPressed.Invoke(isLeft, isLight, isPressed);
     }
 
     private void CalcSpriteWidth()
@@ -128,6 +123,7 @@ public class OfficeManager : MonoBehaviour
     private void OnDisable()
     {
         PowerManager.Singleton.PowerOutage -= OnOutage;
+        //interact.performed -= ClickCheckUwU;
     }
 
     // mouse position set
@@ -138,7 +134,6 @@ public class OfficeManager : MonoBehaviour
             return;
         }
 
-        mousePos = point.ReadValue<Vector2>();
         CalcSpriteWidth();
         MouseScreenCheck();
     }
@@ -149,6 +144,8 @@ public class OfficeManager : MonoBehaviour
         {
             return;
         }
+
+        Vector2 mousePos = GameManager.Singleton.mousePos;
 
         float minLeftPos = (float)(Screen.width * 0.2);
         float minRightPos = (float)Screen.width - minLeftPos;
@@ -183,7 +180,17 @@ public class OfficeManager : MonoBehaviour
         }
     }
 
-
+    public void DoorLightView(bool isLeft, bool isOn)
+    {
+        if (isLeft)
+        {
+            leftDoor.SetSprites(true, isOn);
+        }
+        else
+        {
+            rightDoor.SetSprites(true, isOn);
+        }
+    }
 
     private void OnOutage()
     {

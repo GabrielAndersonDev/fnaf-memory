@@ -57,7 +57,7 @@ public abstract class AnimData : ScriptableObject
                 break;
             case CamEnum.LDoor:
                 Debug.Log("Running left door:");
-                if (!OfficeManager.Singleton.isLDoorClosed)
+                if (!OfficeManager.Singleton.leftDoor.isClosed)
                 {
                     Debug.Log("Left door is open on movement opportunity");
                     if (CamsManager.Singleton.inCams)
@@ -76,7 +76,7 @@ public abstract class AnimData : ScriptableObject
                 }
                 break;
             case CamEnum.RDoor:
-                if (!OfficeManager.Singleton.isRDoorClosed)
+                if (!OfficeManager.Singleton.rightDoor.isClosed)
                 {
                     if (CamsManager.Singleton.inCams)
                     {

@@ -13,10 +13,6 @@ public class GameUIManager : MonoBehaviour
     public static GameUIManager Singleton { get; private set; }
 
     [SerializeField]
-    GameObject officeObject;
-    VisualElement officeUI;
-
-    [SerializeField]
     GameObject camsObject;
     VisualElement camsUI;
 
@@ -74,7 +70,6 @@ public class GameUIManager : MonoBehaviour
     public void InitUI()
     {
         camsUI = camsObject.GetComponent<UIDocument>().rootVisualElement;
-        officeUI = officeObject.GetComponent<UIDocument>().rootVisualElement;
         baseGameUI = baseGameUIObject.GetComponent<UIDocument>().rootVisualElement;
 
         powerText = baseGameUI.Q<TextElement>("power-text");
@@ -162,16 +157,12 @@ public class GameUIManager : MonoBehaviour
         if (toggle)
         {
             camsUI.SetEnabled(true);
-            officeUI.SetEnabled(false);
             camsUI.style.display = DisplayStyle.Flex;
-            officeUI.style.display = DisplayStyle.None;
         }
         else
         {
             camsUI.SetEnabled(false);
-            officeUI.SetEnabled(true);
             camsUI.style.display = DisplayStyle.None;
-            officeUI.style.display = DisplayStyle.Flex;
         }
     }
 

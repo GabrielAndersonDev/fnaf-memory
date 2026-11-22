@@ -26,7 +26,7 @@ public class Freddy : AnimData
                 Debug.Break();
                 break;
             case CamEnum.FourB:
-                if (!OfficeManager.Singleton.isRDoorClosed)
+                if (!OfficeManager.Singleton.rightDoor.isClosed)
                 {
                     if (CamsManager.Singleton.inCams
                         && CamsManager.Singleton.currentCam != CamEnum.FourB)

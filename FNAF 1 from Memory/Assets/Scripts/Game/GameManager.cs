@@ -20,6 +20,12 @@ public class GameManager : MonoBehaviour
 
     public InputSystemUIInputModule inputSystem;
 
+    public InputAction point;
+    public Vector2 mousePos;
+
+    public InputAction interact;
+    public InputAction move;
+
     public void Awake()
     {
         if (Singleton != null && Singleton != this)
@@ -32,13 +38,14 @@ public class GameManager : MonoBehaviour
             Singleton = this;
             DontDestroyOnLoad(gameObject);
         }
-
-        // only here temporarily
     }
 
     private void OnEnable()
     {
         inputSystem.actionsAsset.Enable();
+        point = inputSystem.point;
+        interact = inputSystem.leftClick;
+        move = inputSystem.move;
     }
 
     private void OnDisable()
@@ -49,6 +56,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartGame();
+    }
+
+    private void Update()
+    {
+        mousePos = point.ReadValue<Vector2>();
     }
 
     public void StartGame()

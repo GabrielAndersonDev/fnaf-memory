@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,8 @@ public class AIManager : MonoBehaviour
     private Coroutine GFreddyRoutine;
 
     public int foxyStage;
+
+    public event Action<bool, bool> AnimAtDoor;
 
     void Awake()
     {
@@ -113,6 +116,17 @@ public class AIManager : MonoBehaviour
         {
             CamEnum prevLocation = AnimLocations[anim];
             AnimLocations[anim] = newLocation;
+
+            if (newLocation == CamEnum.LDoor
+                || prevLocation == CamEnum.LDoor)
+            {
+                AnimAtDoor.Invoke(true, newLocation == CamEnum.LDoor);
+            }
+            else if (newLocation == CamEnum.RDoor
+                || prevLocation == CamEnum.RDoor)
+            {
+                AnimAtDoor.Invoke(true, newLocation == CamEnum.RDoor);
+            }
 
             if (CamsManager.Singleton.inCams)
             {

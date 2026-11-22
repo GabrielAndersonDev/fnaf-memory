@@ -11,7 +11,7 @@ TagManager:
   - Camera
   - Water
   - UI
-  - 
+  - Office Buttons
   - 
   - 
   - 
@@ -44,5 +44,18 @@ TagManager:
   - name: Background
     uniqueID: 3862669509
     locked: 0
+  - name: Button
+    uniqueID: 3420152803
+    locked: 0
+  - name: Light
+    uniqueID: 3686335253
+    locked: 0
+  - name: Anim
+    uniqueID: 1412807303
+    locked: 0
+  - name: Door
+    uniqueID: 1890979133
+    locked: 0
   m_RenderingLayers:
   - Default
+  - ButtonRender
