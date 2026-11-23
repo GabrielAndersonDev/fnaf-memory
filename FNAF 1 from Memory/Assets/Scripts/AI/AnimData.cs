@@ -56,7 +56,6 @@ public abstract class AnimData : ScriptableObject
                 Debug.Break();
                 break;
             case CamEnum.LDoor:
-                Debug.Log("Running left door:");
                 if (!OfficeManager.Singleton.leftDoor.isClosed)
                 {
                     Debug.Log("Left door is open on movement opportunity");

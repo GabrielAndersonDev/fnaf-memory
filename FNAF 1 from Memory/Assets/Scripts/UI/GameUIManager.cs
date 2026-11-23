@@ -61,13 +61,13 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
         InitUI();
         InitAnimJumpDictionary();
     }
 
-    public void InitUI()
+    private void InitUI()
     {
         camsUI = camsObject.GetComponent<UIDocument>().rootVisualElement;
         baseGameUI = baseGameUIObject.GetComponent<UIDocument>().rootVisualElement;

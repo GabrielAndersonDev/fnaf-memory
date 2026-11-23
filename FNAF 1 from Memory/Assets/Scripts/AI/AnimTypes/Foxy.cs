@@ -7,12 +7,23 @@ using UnityEngine;
 public class Foxy : AnimData
 {
     private static readonly WaitForSeconds waitForSeconds3 = new(3f);
-    private Coroutine FoxyRunCoroutine;
+    private bool isCamUp;
+
+    public override void InitAnim(int dif)
+    {
+        base.InitAnim(dif);
+        CamsManager.Singleton.OnCamFlip += CamDown;
+    }
+
     public override IEnumerator AnimatronicRoutine()
     {
         while (!NightManager.Singleton.isNightOver)
         {
-            while (!CamsManager.Singleton.inCams
+            yield return new WaitUntil(() => !isCamUp);
+
+            yield return new WaitUntil(() => AIManager.Singleton.foxyStage != 4);
+
+            while (!isCamUp
                 && AIManager.Singleton.foxyStage != 4)
             {
                 yield return waitForSeconds5;
@@ -24,11 +35,14 @@ public class Foxy : AnimData
                     Move();
                 }
             }
-
-            yield return waitForSeconds3;
         }
 
         yield return null;
+    }
+
+    private void CamDown(bool isUp)
+    {
+        isCamUp = isUp;
     }
 
     public override void Move()
@@ -90,6 +104,5 @@ public class Foxy : AnimData
     public override void Jumpscare(bool camUp)
     {
         base.Jumpscare(camUp);
-        
     }
 }

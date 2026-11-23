@@ -1,0 +1,49 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/CustomNightUI/CustomNightUSS.uss?fileID=7433441132597879392&amp;guid=e2b61a5dd775bb848be50ac9612a7bbc&amp;type=3#CustomNightUSS"/>
+    <ui:VisualElement name="root">
+        <ui:TextElement name="title" text="Custom Night" />
+        <ui:Box name="anim-info-box">
+            <ui:Box name="bonnie-box" class="anim-box bonnie">
+                <ui:TextElement name="bonnie-name-text" class="anim-name bonnie" text="Bonnie" />
+                <ui:Image name="bonnie-img" class="anim-img bonnie" src="" />
+                <ui:Box name="bonnie-dif-box" class="dif-box bonnie">
+                    <ui:Button name="bonnie-down-btn" class="down-btn bonnie" />
+                    <ui:TextElement name="bonnie-dif-text" class="dif bonnie" text="0" />
+                    <ui:Button name="bonnie-up-btn" class="up-btn bonnie" />
+                </ui:Box>
+            </ui:Box>
+
+            <ui:Box name="chica-box" class="anim-box chica">
+                <ui:TextElement name="chica-name-text" class="anim-name chica" text="Chica" />
+                <ui:Image name="chica-img" class="anim-img chica" src="" />
+                <ui:Box name="chica-dif-box" class="dif-box chica">
+                    <ui:Button name="chica-down-btn" class="down-btn chica" />
+                    <ui:TextElement name="chica-dif-text" class="dif chica" text="0" />
+                    <ui:Button name="chica-up-btn" class="up-btn chica" />
+                </ui:Box>
+            </ui:Box>
+
+            <ui:Box name="freddy-box" class="anim-box freddy">
+                <ui:TextElement name="freddy-name-text" class="anim-name freddy" text="Freddy" />
+                <ui:Image name="freddy-img" class="anim-img freddy" src="" />
+                <ui:Box name="freddy-dif-box" class="dif-box freddy">
+                    <ui:Button name="freddy-down-btn" class="down-btn freddy" />
+                    <ui:TextElement name="freddy-dif-text" class="dif freddy" text="0" />
+                    <ui:Button name="freddy-up-btn" class="up-btn freddy" />
+                </ui:Box>
+            </ui:Box>
+
+            <ui:Box name="foxy-box" class="anim-box foxy">
+                <ui:TextElement name="foxy-name-text" class="anim-name foxy" text="Foxy" />
+                <ui:Image name="foxy-img" class="anim-img foxy" src="" />
+                <ui:Box name="foxy-dif-box" class="dif-box foxy">
+                    <ui:Button name="foxy-down-btn" class="down-btn foxy" />
+                    <ui:TextElement name="foxy-dif-text" class="dif foxy" text="0" />
+                    <ui:Button name="foxy-up-btn" class="up-btn foxy" />
+                </ui:Box>
+            </ui:Box>
+        </ui:Box>
+
+        <ui:Box name="7
+    </ui:VisualElement>
+</ui:UXML>

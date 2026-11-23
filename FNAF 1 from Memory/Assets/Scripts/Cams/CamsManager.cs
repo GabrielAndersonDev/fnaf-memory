@@ -52,6 +52,7 @@ public class CamsManager : MonoBehaviour
         }
 
         isCamsDisabled = false;
+        PopulateCamDictionary();
     }
 
     private void Start()

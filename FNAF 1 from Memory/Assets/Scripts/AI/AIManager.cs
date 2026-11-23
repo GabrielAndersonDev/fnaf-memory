@@ -51,8 +51,22 @@ public class AIManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        InitAIManager();
+    }
+
     public void InitAIManager()
     {
+        if (GameManager.Singleton.night == 7)
+        {
+            animDifficulty = GameManager.Singleton.CustomDifficulty;
+        }
+        else
+        {
+            animDifficulty = GameManager.Singleton.defaultDifficulties[GameManager.Singleton.night - 1];
+        }
+
         PopulateAnimLocations();
         BeginAnimCoroutines();
 
