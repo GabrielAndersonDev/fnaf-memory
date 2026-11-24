@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1b5fb0ff5b7574fb1bc2243725f087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PowerManager
-  drainRate: 0.01
-  drainIncrease: 0.2
+  drainRate: 0.1
+  drainIncrease: 0.1
 --- !u!4 &13709263
 Transform:
   m_ObjectHideFlags: 0
@@ -772,8 +772,8 @@ MonoBehaviour:
   animDifficulty: {fileID: 0}
   animatronics:
   - {fileID: 11400000, guid: ecbce96509f692347a99210a48186215, type: 2}
-  - {fileID: 11400000, guid: 7e329787b8563574b9f685d80019509d, type: 2}
   - {fileID: 11400000, guid: 07fb0049e238e9f44a9cdf34e72a6e2e, type: 2}
+  - {fileID: 11400000, guid: 7e329787b8563574b9f685d80019509d, type: 2}
   - {fileID: 11400000, guid: 25c611ed002122a44843af01c014ff91, type: 2}
   - {fileID: 11400000, guid: be24f2ed38ff97b4bba68e375ff7ef7e, type: 2}
   foxyStage: 0

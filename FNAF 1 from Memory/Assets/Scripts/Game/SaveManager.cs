@@ -1,4 +1,15 @@
+using System;
+using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
+
+[Serializable]
+public class SaveData
+{
+    public bool isNewSave;
+    public int nightSaved;
+}
 
 public class SaveManager : MonoBehaviour
 {
@@ -6,9 +17,10 @@ public class SaveManager : MonoBehaviour
     public bool isNewSave;
 
     public int nightSaved;
-    public bool nightFiveCompleted;
-    public bool nightSixCompleted;
-    public bool maxModeCompleted;
+
+    public const string SaveFileName = "/savedata.json";
+
+    InputAction delete;
 
     private void Awake()
     {
@@ -25,34 +37,84 @@ public class SaveManager : MonoBehaviour
         LoadSaveData();
     }
 
+    private void Start()
+    {
+        delete = GameManager.Singleton.inputSystem.cancel;
+        delete.performed += DeleteSaveData;
+    }
+
+    private void OnDisable()
+    {
+        delete.performed -= DeleteSaveData;
+    }
+
     private void SaveData()
     {
-        Debug.LogWarning("SaveManager: no data to save, not implemented");
+        isNewSave = false;
+
+        string filePath = Application.persistentDataPath + SaveFileName;
+        SaveData saveData = new()
+        {
+            isNewSave = false,
+            nightSaved = nightSaved
+        };
+        string txt = JsonUtility.ToJson(saveData);
+        File.WriteAllText(filePath, txt);
     }
 
     private void LoadSaveData()
     {
-        Debug.LogWarning("SaveManager: no save data to load, not implemented");
+        try
+        {
+            string filePath = Application.persistentDataPath + SaveFileName;
+            string txt = File.ReadAllText(filePath);
+            SaveData saveData = JsonUtility.FromJson<SaveData>(txt);
+            isNewSave = saveData.isNewSave;
+            nightSaved = saveData.nightSaved;
+        }
+        catch
+        {
+            isNewSave = true;
+        }
     }
 
-    private void DeleteSaveData()
+    private void DeleteSaveData(InputAction.CallbackContext context)
     {
-        Debug.LogWarning("SaveManager: no save data to load, not implemented");
+        if (context.interaction is HoldInteraction)
+        {
+            try
+            {
+                string filePath = Application.persistentDataPath + SaveFileName;
+                File.Delete(filePath);
+            }
+            catch
+            {
+                return;
+            }
+        }
     }
 
-    public void SaveNightWin()
+    public void SaveNight(bool isWon)
     {
+        if (!isWon)
+        {
+            if (GameManager.Singleton.night == 1)
+            {
+                SaveData();
+            }
+            return;
+        }
+
         if (GameManager.Singleton.night == 7)
         {
             AnimDifficulty dif = GameManager.Singleton.CustomDifficulty;
 
             if (dif.bonnie == 20
-                && dif.freddy == 20
                 && dif.chica == 20
+                && dif.freddy == 20
                 && dif.foxy == 20)
             {
                 nightSaved = 7;
-                maxModeCompleted = true;
             }
 
             SaveData();
@@ -62,9 +124,6 @@ public class SaveManager : MonoBehaviour
         if (GameManager.Singleton.night > nightSaved)
         {
             nightSaved = GameManager.Singleton.night;
-
-            if (nightSaved == 5) nightFiveCompleted = true;
-            if (nightSaved == 6) nightSixCompleted = true;
 
             SaveData();
         }

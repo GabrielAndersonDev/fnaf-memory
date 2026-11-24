@@ -44,6 +44,9 @@
             </ui:Box>
         </ui:Box>
 
-        <ui:Box name="7
+        <ui:Box name="nav-btn-Box">
+            <ui:Button name="back-btn" text="Back" />
+            <ui:Button name="custom-start-btn" text="Start" />
+        </ui:Box>
     </ui:VisualElement>
 </ui:UXML>

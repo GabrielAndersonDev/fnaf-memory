@@ -6,11 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FreddyData", menuName = "Scriptable Objects/FreddyData")]
 public class Freddy : AnimData
 {
-    public override IEnumerator AnimatronicRoutine()
-    {
-        return base.AnimatronicRoutine();
-    }
-
     public override void Move()
     {
         CamEnum currentCam = AIManager.Singleton.AnimLocations[animatronic];
@@ -72,7 +67,7 @@ public class Freddy : AnimData
         for (var freddyStage = 0; freddyStage < 4; freddyStage++)
         {
             float time = Random.Range(3f, 10f);
-
+            Debug.Log(time);
             yield return OfficeManager.Singleton.FreddyOutageAnim(time, freddyStage);
         }
 

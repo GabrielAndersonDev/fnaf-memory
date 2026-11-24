@@ -37,7 +37,7 @@ public class PowerManager : MonoBehaviour
     {
         foxyHitMult = 1;
         PowerFloat = 100f;
-        inUseCount = 1;
+        inUseCount = 0;
         isOutage = false;
 
         AssignInUseChange();
@@ -67,9 +67,11 @@ public class PowerManager : MonoBehaviour
             PowerOutage.Invoke();
         }
 
-        if ((int)PowerFloat != PowerInt)
+        int rounded = (int)Math.Ceiling(PowerFloat);
+
+        if (rounded != PowerInt)
         {
-            PowerInt = (int)PowerFloat;
+            PowerInt = rounded;
             Power.Invoke(PowerInt);
         }
     }
@@ -98,9 +100,9 @@ public class PowerManager : MonoBehaviour
         }
         else
         {
-            if (inUseCount == 1)
+            if (inUseCount == 0)
             {
-                Debug.LogError("PowerManager: inUseCount is already 1, trying to remove another source.");
+                Debug.LogError("PowerManager: inUseCount is already 0, trying to remove another source.");
                 Debug.Break();
             }
 

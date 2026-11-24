@@ -25,16 +25,20 @@ public class AIManager : MonoBehaviour
 
     public AnimData[] animatronics;
 
+    public Dictionary<AnimatronicEnum, AnimData> AnimEnumToDataDictionary;
     public Dictionary<AnimatronicEnum, CamEnum> AnimLocations;
 
     private Coroutine BonnieRoutine;
-    private Coroutine FreddyRoutine;
     private Coroutine ChicaRoutine;
+    private Coroutine FreddyRoutine;
     private Coroutine FoxyRoutine;
-    private Coroutine FoxyRunRoutine;
     private Coroutine GFreddyRoutine;
 
     public int foxyStage;
+    public bool foxyAlreadySeen;
+
+    public readonly static WaitForSeconds waitForSeconds5 = new(5f);
+    public readonly static WaitForSeconds waitForSeconds7 = new(7f);
 
     public event Action<bool, bool> AnimAtDoor;
 
@@ -67,12 +71,14 @@ public class AIManager : MonoBehaviour
             animDifficulty = GameManager.Singleton.defaultDifficulties[GameManager.Singleton.night - 1];
         }
 
-        PopulateAnimLocations();
+        PopulateAnimDictionaries();
         BeginAnimCoroutines();
 
         PowerManager.Singleton.PowerOutage += OnOutage;
         GameManager.Singleton.KillPlayer += OnNightEnd;
         GameManager.Singleton.NightWin += OnNightEnd;
+        CamsManager.Singleton.OnCamSwitch += CheckCamState;
+        CamsManager.Singleton.OnCamFlip += CheckFoxyCamFlip;
     }
 
     private void OnDisable()
@@ -80,6 +86,8 @@ public class AIManager : MonoBehaviour
         PowerManager.Singleton.PowerOutage -= OnOutage;
         GameManager.Singleton.KillPlayer -= OnNightEnd;
         GameManager.Singleton.NightWin -= OnNightEnd;
+        CamsManager.Singleton.OnCamSwitch -= CheckCamState;
+        CamsManager.Singleton.OnCamFlip -= CheckFoxyCamFlip;
     }
 
     private void BeginAnimCoroutines()
@@ -90,19 +98,15 @@ public class AIManager : MonoBehaviour
             {
                 case AnimatronicEnum.Bonnie:
                     anim.InitAnim(animDifficulty.bonnie);
-                    BonnieRoutine ??= StartCoroutine(anim.AnimatronicRoutine());
                     break;
                 case AnimatronicEnum.Freddy:
                     anim.InitAnim(animDifficulty.freddy);
-                    FreddyRoutine ??= StartCoroutine(anim.AnimatronicRoutine());
                     break;
                 case AnimatronicEnum.Chica:
                     anim.InitAnim(animDifficulty.chica);
-                    ChicaRoutine ??= StartCoroutine(anim.AnimatronicRoutine());
                     break;
                 case AnimatronicEnum.Foxy:
                     anim.InitAnim(animDifficulty.foxy);
-                    FoxyRoutine ??= StartCoroutine(anim.AnimatronicRoutine());
                     break;
                 case AnimatronicEnum.GoldenFreddy:
                     break;
@@ -111,16 +115,65 @@ public class AIManager : MonoBehaviour
                     Debug.Break();
                     break;
             }
+
+            AnimCoroutineSwitch(anim.animatronic, false);
         }
     }
 
-    void PopulateAnimLocations()
+    private void AnimCoroutineSwitch(AnimatronicEnum anim, bool isStall)
+    {
+        switch (anim)
+        {
+            case AnimatronicEnum.Bonnie:
+                if (BonnieRoutine != null)
+                {
+                    StopCoroutine(BonnieRoutine);
+                    BonnieRoutine = null;
+                }
+                BonnieRoutine ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, isStall, waitForSeconds7));
+                break;
+            case AnimatronicEnum.Freddy:
+                if (FreddyRoutine != null)
+                {
+                    StopCoroutine(FreddyRoutine);
+                    FreddyRoutine = null;
+                }
+                FreddyRoutine ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, isStall, waitForSeconds7));
+                break;
+            case AnimatronicEnum.Chica:
+                if (ChicaRoutine != null)
+                {
+                    StopCoroutine(ChicaRoutine);
+                    ChicaRoutine = null;
+                }
+                ChicaRoutine ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, isStall, waitForSeconds7));
+                break;
+            case AnimatronicEnum.Foxy:
+                if (FoxyRoutine != null)
+                {
+                    StopCoroutine(FoxyRoutine);
+                    FoxyRoutine = null;
+                }
+                FoxyRoutine ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, isStall, waitForSeconds7));
+                break;
+            case AnimatronicEnum.GoldenFreddy:
+                break;
+            default:
+                Debug.LogError("AIManager: invalid animatronic in AnimData.");
+                Debug.Break();
+                break;
+        }
+    }
+
+    void PopulateAnimDictionaries()
     {
         AnimLocations = new Dictionary<AnimatronicEnum, CamEnum>();
+        AnimEnumToDataDictionary = new();
 
         foreach (var anim in animatronics)
         {
             AnimLocations.Add(anim.animatronic, anim.startLocation);
+            AnimEnumToDataDictionary.Add(anim.animatronic, anim);
         }
     }
 
@@ -163,22 +216,75 @@ public class AIManager : MonoBehaviour
         }
     }
 
-    public void RunFoxyCoroutine(IEnumerator routine)
+    private void CheckCamState(CamEnum cam, AnimatronicEnum[] anims, EventData[] events, int foxyStage)
     {
-        FoxyRunRoutine ??= StartCoroutine(routine);
+        if (cam == CamEnum.LHallway
+            && anims.Contains(AnimatronicEnum.Foxy)
+            && !foxyAlreadySeen)
+        {
+            SwapFoxyRoutine(true, true);
+        }
+
+        foreach (AnimatronicEnum anim in anims)
+        {
+            if (anim == AnimatronicEnum.Foxy) continue;
+
+            AnimCoroutineSwitch(anim, true);
+        }
+    }
+
+    public void SwapFoxyRoutine(bool isRunRoutine, bool isCamCheck)
+    {
+        Debug.Log("SwapFoxyRoutine ran: isRunRoutine: " + isRunRoutine + " isCamCheck: " + isCamCheck);
+
+        if (!isRunRoutine 
+            && isCamCheck)
+        {
+            if (FoxyRoutine != null) StopCoroutine(FoxyRoutine);
+            return;
+        }
+
+        if (AnimEnumToDataDictionary.TryGetValue(AnimatronicEnum.Foxy, out AnimData anim))
+        {
+            if (isRunRoutine)
+            {
+                Foxy foxy = (Foxy)anim;
+
+                WaitForSeconds waitTime = isCamCheck ? new(3f) : waitForSeconds5;
+
+                if (isCamCheck) foxyAlreadySeen = true;
+
+                if (FoxyRoutine != null) StopCoroutine(FoxyRoutine);
+                FoxyRoutine = StartCoroutine(foxy.FoxyRunRoutine(waitTime));
+            }
+            else
+            {
+                AnimCoroutineSwitch(AnimatronicEnum.Foxy, false);
+            }
+        }
+        else
+        {
+            Debug.LogError("AIManager: AnimEnumToData doesn't contain Foxy.");
+            Debug.Break();
+        }
+    }
+
+    // triggered whenever the cam flips up or down
+    public void CheckFoxyCamFlip(bool isCamUp)
+    {
+        if (foxyStage != 4)
+        {
+            SwapFoxyRoutine(false, isCamUp);
+        }
     }
 
     private void OnOutage()
     {
         StopAllCoroutines();
 
-        foreach (AnimData anim in animatronics)
-        {
-            if (anim.animatronic == AnimatronicEnum.Freddy)
-            {
-                FreddyRoutine ??= StartCoroutine(anim.FreddyOutage());
-            }
-        }
+        if (FreddyRoutine != null) FreddyRoutine = null;
+
+        FreddyRoutine ??= StartCoroutine(AnimEnumToDataDictionary[AnimatronicEnum.Freddy].FreddyOutage());
     }
 
     private void OnNightEnd()

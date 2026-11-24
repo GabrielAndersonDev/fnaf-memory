@@ -6,54 +6,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FoxyData", menuName = "Scriptable Objects/FoxyData")]
 public class Foxy : AnimData
 {
-    private static readonly WaitForSeconds waitForSeconds3 = new(3f);
-    private bool isCamUp;
-
-    public override void InitAnim(int dif)
-    {
-        base.InitAnim(dif);
-        CamsManager.Singleton.OnCamFlip += CamDown;
-    }
-
-    public override IEnumerator AnimatronicRoutine()
-    {
-        while (!NightManager.Singleton.isNightOver)
-        {
-            yield return new WaitUntil(() => !isCamUp);
-
-            yield return new WaitUntil(() => AIManager.Singleton.foxyStage != 4);
-
-            while (!isCamUp
-                && AIManager.Singleton.foxyStage != 4)
-            {
-                yield return waitForSeconds5;
-
-                int rand = Random.Range(1, 20);
-
-                if (rand <= difficulty)
-                {
-                    Move();
-                }
-            }
-        }
-
-        yield return null;
-    }
-
-    private void CamDown(bool isUp)
-    {
-        isCamUp = isUp;
-    }
-
     public override void Move()
     {
-        if (AIManager.Singleton.foxyStage > 2)
+        Debug.Log("Foxy is moving: " + AIManager.Singleton.foxyStage);
+
+        if (AIManager.Singleton.foxyStage == 3)
         {
+            Debug.Log("Foxy is at stage 4 move");
             AIManager.Singleton.foxyStage = 4;
 
             AIManager.Singleton.UpdateAnimLocation(AnimatronicEnum.Foxy, CamEnum.LHallway);
-            CamsManager.Singleton.OnCamSwitch += CheckCamState;
-            AIManager.Singleton.RunFoxyCoroutine(FoxyRunRoutine(false));
+            AIManager.Singleton.SwapFoxyRoutine(true, false);
         }
         else
         {
@@ -61,29 +24,14 @@ public class Foxy : AnimData
         }
     }
 
-    private void CheckCamState(CamEnum cam, AnimatronicEnum[] anims, EventData[] events, int foxyStage)
+    public IEnumerator FoxyRunRoutine(WaitForSeconds waitTime)
     {
-        if (cam == CamEnum.LHallway
-            && anims.Contains(AnimatronicEnum.Foxy))
-        {
-            AIManager.Singleton.RunFoxyCoroutine(FoxyRunRoutine(true));
-        }
-    }
+        Debug.Log("In foxy run routine");
 
-    private IEnumerator FoxyRunRoutine(bool isCamCheck)
-    {
-        if (isCamCheck)
-        {
-            yield return waitForSeconds3;
-            FoxyDoorCheck();
-        }
-        else
-        {
-            yield return waitForSeconds5;
-            FoxyDoorCheck();
-        }
+        yield return waitTime;
+        FoxyDoorCheck();
 
-        CamsManager.Singleton.OnCamSwitch -= CheckCamState;
+        AIManager.Singleton.foxyAlreadySeen = false;
     }
 
     private void FoxyDoorCheck()
@@ -95,14 +43,9 @@ public class Foxy : AnimData
         else
         {
             PowerManager.Singleton.FoxyAttack();
-
-            AIManager.Singleton.UpdateAnimLocation(AnimatronicEnum.Foxy, CamEnum.PirateCove);
             AIManager.Singleton.foxyStage = 0;
+            AIManager.Singleton.SwapFoxyRoutine(false, false);
+            AIManager.Singleton.UpdateAnimLocation(AnimatronicEnum.Foxy, CamEnum.PirateCove);
         }
-    }
-
-    public override void Jumpscare(bool camUp)
-    {
-        base.Jumpscare(camUp);
     }
 }

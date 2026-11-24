@@ -7,8 +7,6 @@ using UnityEngine;
 
 public abstract class AnimData : ScriptableObject
 {
-    public readonly static WaitForSeconds waitForSeconds5 = new(5f);
-
     public string animName;
     public int animID;
     public AnimatronicEnum animatronic;
@@ -26,13 +24,16 @@ public abstract class AnimData : ScriptableObject
         difficulty = dif;
     }
 
-    public virtual IEnumerator AnimatronicRoutine()
+    public virtual IEnumerator AnimatronicRoutine(WaitForSeconds waitTime, bool stallRun, WaitForSeconds stallTime)
     {
+        bool isStalled = stallRun;
+
         while (!NightManager.Singleton.isNightOver)
         {
-            yield return waitForSeconds5;
-
-            Debug.Log("Animatronic " + animName + " coroutine is running!");
+            Debug.Log("Animatronic " + animName + " is in routine.");
+            WaitForSeconds time = isStalled ? stallTime : waitTime;
+            
+            yield return time;
 
             int rand = Random.Range(1, 20);
 
@@ -40,9 +41,9 @@ public abstract class AnimData : ScriptableObject
             {
                 Move();
             }
-        }
 
-        yield return null;
+            isStalled = false;
+        }
     }
 
     public virtual void Move()
@@ -122,6 +123,6 @@ public abstract class AnimData : ScriptableObject
 
     public virtual IEnumerator FreddyOutage()
     {
-        yield return null;
+        yield break;
     }
 }

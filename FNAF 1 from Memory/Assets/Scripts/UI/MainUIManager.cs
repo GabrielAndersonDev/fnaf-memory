@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -24,6 +25,11 @@ public class MainUIManager : MonoBehaviour
     Box starBox;
     [SerializeField]
     Sprite starSprite;
+
+    List<Box> difBoxes;
+
+    Button customBackBtn;
+    Button customStartBtn;
 
     private void Awake()
     {
@@ -57,6 +63,11 @@ public class MainUIManager : MonoBehaviour
         quitGameBtn = mainUI.Q<Button>("quit-game-btn");
 
         starBox = mainUI.Q<Box>("star-box");
+
+        difBoxes = customUI.Query<Box>(className: "dif-box").ToList();
+
+        customBackBtn = customUI.Q<Button>("back-btn");
+        customStartBtn = customUI.Q<Button>("custom-start-btn");
 
         CheckNightInfo();
         SetStarCount();
@@ -136,9 +147,20 @@ public class MainUIManager : MonoBehaviour
     {
         int starCount = 0;
 
-        if (SaveManager.Singleton.nightFiveCompleted) starCount++;
-        if (SaveManager.Singleton.nightSixCompleted) starCount++;
-        if (SaveManager.Singleton.maxModeCompleted) starCount++;
+        switch (SaveManager.Singleton.nightSaved)
+        {
+            case 5:
+                starCount = 1;
+                break;
+            case 6:
+                starCount = 2;
+                break;
+            case 7:
+                starCount = 3;
+                break;
+            default:
+                break;
+        }
 
         for (var i = 0; i < starCount; i++)
         {
@@ -156,6 +178,9 @@ public class MainUIManager : MonoBehaviour
         startGameBtn.clicked += () => GameManager.Singleton.StartGame(StartGameClicked());
         nightSixBtn.clicked += () => GameManager.Singleton.StartGame(6);
         customNightBtn.clicked += () => ToggleCustomNight(true);
+        AnimDifBtnAssign(true);
+        customBackBtn.clicked += () => ToggleCustomNight(false);
+        customStartBtn.clicked += () => OnCustomStartBtn();
     }
 
     private int StartGameClicked()
@@ -175,10 +200,105 @@ public class MainUIManager : MonoBehaviour
         }
     }
 
+    private void AnimDifBtnAssign(bool setOn)
+    {
+        foreach (Box difBox in difBoxes)
+        {
+            Button upBtn = difBox.Q<Button>(className: "up-btn");
+            Button downBtn = difBox.Q<Button>(className: "down-btn");
+            TextElement difElement = difBox.Q<TextElement>(className: "dif");
+
+            if (setOn)
+            {
+                upBtn.clicked += () => ChangeDifCount(difElement, true);
+                downBtn.clicked += () => ChangeDifCount(difElement, false);
+            }
+            else
+            {
+                upBtn.clicked -= () => ChangeDifCount(difElement, true);
+                downBtn.clicked -= () => ChangeDifCount(difElement, false);
+            }
+            
+        }
+    }
+
+    private void ChangeDifCount(TextElement difElement, bool isAdd)
+    {
+        if (int.TryParse(difElement.text, out int dif))
+        {
+            if (isAdd
+                && dif < 20)
+            {
+                difElement.text = (dif + 1).ToString();
+            }
+            else if (!isAdd
+                && dif > 0)
+            {
+                difElement.text = (dif - 1).ToString();
+            }
+
+            if (dif > 20
+                || dif < 0)
+            {
+                difElement.text = dif > 20 ? "20" : "0";
+            }
+        }
+        else
+        {
+            Debug.LogError("MainUIManager: custom difficulty int is invalid.");
+            Debug.Break();
+        }
+    }
+
+    private void OnCustomStartBtn()
+    {
+        int bonnie = 0;
+        int chica =  0;
+        int foxy = 0;
+        int freddy = 0;
+
+        foreach (Box difBox in difBoxes)
+        {
+            TextElement difElement = difBox.Q<TextElement>(className: "dif");
+
+            if (int.TryParse(difElement.text, out int dif))
+            {
+                if (difElement.ClassListContains("bonnie"))
+                {
+                    bonnie = dif;
+                    continue;
+                }
+
+                if (difElement.ClassListContains("chica"))
+                {
+                    chica = dif;
+                    continue;
+                }
+
+                if (difElement.ClassListContains("freddy"))
+                {
+                    freddy = dif;
+                    continue;
+                }
+
+                if (difElement.ClassListContains("foxy"))
+                {
+                    foxy = dif;
+                    continue;
+                }
+            }
+        }
+
+        GameManager.Singleton.StartCustomNight(bonnie, chica, freddy, foxy);
+    }
+
     private void OnDisable()
     {
         startGameBtn.clicked -= () => GameManager.Singleton.StartGame(StartGameClicked());
         nightSixBtn.clicked -= () => GameManager.Singleton.StartGame(6);
         customNightBtn.clicked -= () => ToggleCustomNight(true);
+        AnimDifBtnAssign(false);
+        customBackBtn.clicked -= () => ToggleCustomNight(false);
+        customStartBtn.clicked -= () => OnCustomStartBtn();
     }
 }

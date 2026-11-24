@@ -6,7 +6,7 @@ public class NightManager : MonoBehaviour
 {
     public static NightManager Singleton { get; private set; }
     public int Hour { get;  private set; }
-    private static WaitForSeconds waitForSeconds80 = new(80f);
+    private readonly static WaitForSeconds waitForSeconds80 = new(80f);
 
     public event Action<int> HourChange;
 
@@ -28,6 +28,12 @@ public class NightManager : MonoBehaviour
 
         isNightOver = false;
 
+        if (HourRoutine != null)
+        {
+            StopCoroutine(HourRoutine);
+            HourRoutine = null;
+        }
+
         HourRoutine ??= StartCoroutine(HourCoroutine());
     }
 
@@ -41,7 +47,8 @@ public class NightManager : MonoBehaviour
             }
 
             yield return waitForSeconds80;
-            Hour = Hour == 12 ? 1 : Hour++;
+
+            Hour = Hour == 12 ? 1 : ++Hour;
             HourChange.Invoke(Hour);
         }
     }
@@ -54,7 +61,7 @@ public class NightManager : MonoBehaviour
     private void WinNight()
     {
         isNightOver = true;
-        Debug.Log("You won! Not implemented yet.");
+        Debug.Log("You won! Not fully implemented yet.");
         GameManager.Singleton.OnNightWin();
     }
 }

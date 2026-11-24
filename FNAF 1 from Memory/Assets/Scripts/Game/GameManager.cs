@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public AnimDifficulty[] defaultDifficulties;
-    public AnimDifficulty CustomDifficulty { get; private set; }
+    public AnimDifficulty CustomDifficulty;
 
     public event Action KillPlayer;
     public event Action NightWin;
@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
             Singleton = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        CustomDifficulty = AnimDifficulty.CreateInstance<AnimDifficulty>();
     }
 
     private void OnEnable()
@@ -63,6 +65,7 @@ public class GameManager : MonoBehaviour
     public void StartGame(int night)
     {
         this.night = night;
+        isGameOver = false;
 
         // Function for swapping scenes to gaameplay and taking in night and difficulty info
         if (SaveManager.Singleton.isNewSave)
@@ -74,27 +77,22 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
-    public void StartCustomNight(int bonnie, int freddy, int chica, int foxy)
+    public void StartCustomNight(int bonnie, int chica, int freddy, int foxy)
     {
         if (bonnie == 1
-            && freddy == 9
-            && chica == 8
+            && chica == 9
+            && freddy == 8
             && foxy == 7)
         {
             GoldenFreddyKill();
             return;
         }
-
-        AnimDifficulty customDiff = new()
-        {
-            night = 7,
-            bonnie = bonnie,
-            freddy = freddy,
-            chica = chica,
-            foxy = foxy
-        };
-
-        CustomDifficulty = customDiff;
+        
+        CustomDifficulty.night = 7;
+        CustomDifficulty.bonnie = bonnie;
+        CustomDifficulty.freddy = freddy;
+        CustomDifficulty.chica = chica;
+        CustomDifficulty.foxy = foxy;
 
         StartGame(7);
     }
@@ -119,11 +117,7 @@ public class GameManager : MonoBehaviour
     private void EndGame(bool isNightWon)
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-
-        if (isNightWon)
-        {
-            SaveManager.Singleton.SaveNightWin();
-        }
+        SaveManager.Singleton.SaveNight(isNightWon);
     }
 
     public void GoldenFreddyKill()

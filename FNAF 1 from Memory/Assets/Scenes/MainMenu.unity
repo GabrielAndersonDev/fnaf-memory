@@ -219,10 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveManager
   isNewSave: 1
-  nightSaved: 5
-  nightFiveCompleted: 0
-  nightSixCompleted: 0
-  maxModeCompleted: 0
+  nightSaved: 7
 --- !u!1 &1382933368
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +337,7 @@ MonoBehaviour:
   m_PointAction: {fileID: -3066091494659192671, guid: 6d3a7efd24160e144a6d2d3f383200f6, type: 3}
   m_MoveAction: {fileID: -5630151704836100654, guid: 6d3a7efd24160e144a6d2d3f383200f6, type: 3}
   m_SubmitAction: {fileID: 0}
-  m_CancelAction: {fileID: 0}
+  m_CancelAction: {fileID: 67482192103035571, guid: 6d3a7efd24160e144a6d2d3f383200f6, type: 3}
   m_LeftClickAction: {fileID: 1781555164194001046, guid: 6d3a7efd24160e144a6d2d3f383200f6, type: 3}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
@@ -386,6 +383,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 10e4054633d33204da9eb02fcc8e1509, type: 2}
   - {fileID: 11400000, guid: dc6b9ab1f92f9c14fab359ff50311528, type: 2}
   - {fileID: 11400000, guid: 1acc74730f53ead48a6afc849a7e9707, type: 2}
+  CustomDifficulty: {fileID: 0}
   isGameOver: 0
   inputSystem: {fileID: 1696692866}
   point:

@@ -203,7 +203,7 @@ public class OfficeManager : MonoBehaviour
     {
         WaitForSeconds waitTime = new(time);
 
-        Debug.LogError("OfficeManager: FreddyOutageAnim is still unimplemented");
+        Debug.Log(waitTime);
 
         yield return waitTime;
     }
