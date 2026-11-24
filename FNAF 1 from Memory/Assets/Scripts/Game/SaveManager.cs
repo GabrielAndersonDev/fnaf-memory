@@ -60,10 +60,13 @@ public class SaveManager : MonoBehaviour
         };
         string txt = JsonUtility.ToJson(saveData);
         File.WriteAllText(filePath, txt);
+
+        LoadSaveData();
     }
 
     private void LoadSaveData()
     {
+        Debug.Log("Loading save data");
         try
         {
             string filePath = Application.persistentDataPath + SaveFileName;
@@ -71,10 +74,13 @@ public class SaveManager : MonoBehaviour
             SaveData saveData = JsonUtility.FromJson<SaveData>(txt);
             isNewSave = saveData.isNewSave;
             nightSaved = saveData.nightSaved;
+            Debug.Log("successfully loaded data");
         }
         catch
         {
+            Debug.Log("No save data present");
             isNewSave = true;
+            nightSaved = 0;
         }
     }
 
@@ -91,6 +97,8 @@ public class SaveManager : MonoBehaviour
             {
                 return;
             }
+
+            LoadSaveData();
         }
     }
 

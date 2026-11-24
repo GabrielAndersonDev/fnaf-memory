@@ -181,6 +181,7 @@ public class MainUIManager : MonoBehaviour
         AnimDifBtnAssign(true);
         customBackBtn.clicked += () => ToggleCustomNight(false);
         customStartBtn.clicked += () => OnCustomStartBtn();
+        quitGameBtn.clicked += () => Application.Quit();
     }
 
     private int StartGameClicked()
@@ -300,5 +301,6 @@ public class MainUIManager : MonoBehaviour
         AnimDifBtnAssign(false);
         customBackBtn.clicked -= () => ToggleCustomNight(false);
         customStartBtn.clicked -= () => OnCustomStartBtn();
+        quitGameBtn.clicked -= () => Application.Quit();
     }
 }
