@@ -39,13 +39,15 @@ public class BtnController : MonoBehaviour
             spriteRenderer.sprite = normalSprite;
         }
 
-        Debug.Log("FREDDY FAZBEAR DAMN");
-
         GameManager.Singleton.interact.performed += OnMouseClick;
+        PowerManager.Singleton.PowerOutage += OnOutage;
+        CamsManager.Singleton.OnCamFlip += CamListener;
     }
 
     private void OnMouseClick(InputAction.CallbackContext context)
     {
+        if (isDisabled) return;
+
         if (context.ReadValue<float>() == 0f)
         {
             Ray ray = Camera.main.ScreenPointToRay(GameManager.Singleton.mousePos);
@@ -59,15 +61,22 @@ public class BtnController : MonoBehaviour
         }
     }
 
+    private void CamListener(bool isUp)
+    {
+        isDisabled = isUp;
+    }
+
     private void OnDisable()
     {
         GameManager.Singleton.interact.performed -= OnMouseClick;
         StopAllCoroutines();
+        PowerManager.Singleton.PowerOutage -= OnOutage;
+        CamsManager.Singleton.OnCamFlip -= CamListener;
     }
 
     public void DebugListener()
     {
-        Debug.Log("Button : " + (isLeft ? "left" : "right") + (isLight ? " light" : " door") + " " + (isPressed ? " is active." : " is off."));
+        Debug.Log("Button : " + (isLeft ? "left" : "right") + (isLight ? " light" : " door") + " " + (isPressed ? "is active." : "is off."));
     }
 
     public void ButtonPressed()
@@ -109,5 +118,14 @@ public class BtnController : MonoBehaviour
         if (isLight) OfficeManager.Singleton.DoorLightView(isLeft, false);
 
         yield return null;
+    }
+
+    private void OnOutage()
+    {
+        enabled = false;
+        GameManager.Singleton.interact.performed -= OnMouseClick;
+        StopAllCoroutines();
+        PowerManager.Singleton.PowerOutage -= OnOutage;
+        CamsManager.Singleton.OnCamFlip -= CamListener;
     }
 }

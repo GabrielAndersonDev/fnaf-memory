@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b689db406e74b428b8138a6f2db002, type: 3}
+  m_Name: PartsServiceEvent
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  eventName: PartsServiceHeads
+  eventType: 0
+  camInvolved: {fileID: 11400000, guid: 333a56184cc581c4db324ff15b8dbf2f, type: 2}
+  animsInvolved: 
+  isMandatory: 0
+  eventRates: 64000000
+  eventSprites:
+  - {fileID: 3267077627818543493, guid: d29c0ee352af6dc4faa9e80777b393b6, type: 3}

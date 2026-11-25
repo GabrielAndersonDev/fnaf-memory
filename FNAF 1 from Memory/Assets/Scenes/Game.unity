@@ -777,6 +777,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 25c611ed002122a44843af01c014ff91, type: 2}
   - {fileID: 11400000, guid: be24f2ed38ff97b4bba68e375ff7ef7e, type: 2}
   foxyStage: 0
+  foxyAlreadySeen: 0
 --- !u!1 &680875407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,6 +1377,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29373490485e41b48a7222eb2ebfac72, type: 2}
   - {fileID: 11400000, guid: d2898a1b203b8864c856ce84a50fc953, type: 2}
   - {fileID: 11400000, guid: ec4abbf3c3d6d234b85b7266f5153ba6, type: 2}
+  - {fileID: 11400000, guid: 275397d86d69bb74bb11141c2138e7e5, type: 2}
   currentCam: 9
   inCams: 0
 --- !u!4 &1291452600

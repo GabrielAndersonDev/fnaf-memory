@@ -13,7 +13,7 @@ public enum EventType
 }
 
 [CreateAssetMenu(fileName = "EventData", menuName = "Scriptable Objects/EventData")]
-public abstract class EventData : ScriptableObject
+public class EventData : ScriptableObject
 {
     public string eventName;
     public EventType eventType;
@@ -27,7 +27,7 @@ public abstract class EventData : ScriptableObject
 
     public Sprite EventRoll()
     {
-        if (eventRates.Length < 1  || eventSprites.Length < 1)
+        if (eventRates.Length < 1 || eventSprites.Length < 1)
         {
             Debug.LogError("EventData " + eventName + ": eventRates or eventSprites are less than one in length.");
             Debug.Break();
@@ -35,8 +35,8 @@ public abstract class EventData : ScriptableObject
 
         if (isMandatory)
         {
-            int roll = Random.Range(1, eventRates[0]);
-            return eventSprites[roll - 1];
+            int roll = Random.Range(0, eventRates[0]);
+            return eventSprites[roll];
         }
         else
         {
@@ -48,7 +48,7 @@ public abstract class EventData : ScriptableObject
 
             for (int i = 0; i < eventRates.Length; i++)
             {
-                int roll = Random.Range(1, eventRates[i]);
+                int roll = Random.Range(1, eventRates[i] + 1);
 
                 if (roll == 1)
                 {

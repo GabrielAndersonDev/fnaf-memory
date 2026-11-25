@@ -167,8 +167,6 @@ public class GameUIManager : MonoBehaviour
     {
         foreach (CamData data in CamsManager.Singleton.camDataArr)
         {
-            string name = data.cam.ToString().ToLower().Replace(" ", "-") + "-btn";
-            
             Button button = new()
             {
                 name = data.cam.ToString().ToLower().Replace(" ", "-") + "-btn",
@@ -238,7 +236,7 @@ public class GameUIManager : MonoBehaviour
                         baseCamSprite = spriteRoll;
                         break;
                     case (EventType.Override):
-                        baseCamSprite = spriteRoll;
+                        camSprite.sprite = spriteRoll;
                         return;
                     case (EventType.Single):
                         for (var i = 0; i < anims.Length; i++)

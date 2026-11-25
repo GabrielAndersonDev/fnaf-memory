@@ -41,10 +41,6 @@ public class OfficeManager : MonoBehaviour
 
     float maxMoveDistanceX;
 
-    InputAction point;
-    InputAction interact;
-    InputAction look;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -61,35 +57,10 @@ public class OfficeManager : MonoBehaviour
 
     private void Start()
     {
-        point = GameManager.Singleton.inputSystem.point;
-        interact = GameManager.Singleton.inputSystem.leftClick;
-        look = GameManager.Singleton.inputSystem.move;
-
         PowerManager.Singleton.PowerOutage += OnOutage;
-        //interact.performed += ClickCheckUwU;
 
         AssignButtons();
     }
-
-    // temporary for btn testing
-    //private void ClickCheckUwU(InputAction.CallbackContext context)
-    //{
-    //    if (context.ReadValue<float>() == 0f)
-    //    {
-    //        Ray ray = Camera.main.ScreenPointToRay(GameManager.Singleton.mousePos);
-    //        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-
-    //        if (hit.collider != null)
-    //        {
-    //            GameObject clickedObj = hit.collider.gameObject;
-    //            Debug.Log(clickedObj.name);
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Hitting object without collider");
-    //        }
-    //    }
-    //}
 
     private void AssignButtons()
     {
@@ -123,7 +94,6 @@ public class OfficeManager : MonoBehaviour
     private void OnDisable()
     {
         PowerManager.Singleton.PowerOutage -= OnOutage;
-        //interact.performed -= ClickCheckUwU;
     }
 
     // mouse position set

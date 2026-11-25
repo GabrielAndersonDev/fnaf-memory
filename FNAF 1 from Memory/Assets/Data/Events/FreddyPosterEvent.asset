@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b689db406e74b428b8138a6f2db002, type: 3}
+  m_Name: FreddyPosterEvent
+  m_EditorClassIdentifier: Assembly-CSharp::EventData
+  eventName: Jan Poster
+  eventType: 0
+  camInvolved: {fileID: 11400000, guid: dc8ad515682628e4dbf2baf81a89b005, type: 2}
+  animsInvolved: 
+  isMandatory: 0
+  eventRates: 1e000000e8030000
+  eventSprites:
+  - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 21300000, guid: 9cdcbc423851b0b4aa05cc66e432e33e, type: 3}

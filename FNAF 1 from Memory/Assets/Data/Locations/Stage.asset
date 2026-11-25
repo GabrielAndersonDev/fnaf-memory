@@ -25,4 +25,6 @@ MonoBehaviour:
   - anim: 1
     sprite: {fileID: 21300000, guid: b4a7a7f8b749d554fb05fd7bc031d326, type: 3}
   foxySprites: []
-  events: []
+  events:
+  - {fileID: 11400000, guid: 7582f75f7017c804cbd0ee614274977b, type: 2}
+  - {fileID: 11400000, guid: 546a1bd3de4d360469cffcce0ba9f2da, type: 2}

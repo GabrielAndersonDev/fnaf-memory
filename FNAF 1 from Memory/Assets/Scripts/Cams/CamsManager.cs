@@ -17,6 +17,7 @@ public enum CamEnum
     Party,
     PirateCove,
     Stage,
+    LCorner,
     Office,
     LDoor,
     RDoor,
@@ -69,7 +70,7 @@ public class CamsManager : MonoBehaviour
     {
         if (camDataArr != null)
         {
-            if (camDataArr.Length != 10)
+            if (camDataArr.Length != 11)
             {
                 Debug.LogError("CamsManager: missing cams in camDataArr.");
                 Debug.Break();
@@ -185,6 +186,11 @@ public class CamsManager : MonoBehaviour
                         break;
                     }
                 }
+            }
+            else
+            {
+                events.Add(e);
+                continue;
             }
         }
 
