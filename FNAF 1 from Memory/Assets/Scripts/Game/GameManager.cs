@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public AnimDifficulty[] defaultDifficulties;
     public AnimDifficulty CustomDifficulty;
 
+    public AnimData[] Anims;
+
     public event Action KillPlayer;
     public event Action NightWin;
 

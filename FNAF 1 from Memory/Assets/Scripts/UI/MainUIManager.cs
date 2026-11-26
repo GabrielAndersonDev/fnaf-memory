@@ -26,10 +26,14 @@ public class MainUIManager : MonoBehaviour
     [SerializeField]
     Sprite starSprite;
 
+    Box animInfoBox;
     List<Box> difBoxes;
 
     Button customBackBtn;
     Button customStartBtn;
+
+    [SerializeField]
+    VisualTreeAsset animCustomAsset;
 
     private void Awake()
     {
@@ -64,6 +68,7 @@ public class MainUIManager : MonoBehaviour
 
         starBox = mainUI.Q<Box>("star-box");
 
+        animInfoBox = customUI.Q<Box>("anim-info-box");
         difBoxes = customUI.Query<Box>(className: "dif-box").ToList();
 
         customBackBtn = customUI.Q<Button>("back-btn");
@@ -72,6 +77,7 @@ public class MainUIManager : MonoBehaviour
         CheckNightInfo();
         SetStarCount();
         SetButtonFunctions();
+        PopulateAnimCustom();
         ToggleCustomNight(false);
     }
 
@@ -203,7 +209,15 @@ public class MainUIManager : MonoBehaviour
 
     private void PopulateAnimCustom()
     {
-        foreach ()
+        foreach (AnimData anim in GameManager.Singleton.Anims)
+        {
+            if (anim.animatronic == AnimatronicEnum.GoldenFreddy) continue;
+
+            var element = animCustomAsset.Instantiate();
+            AnimCustom animCustom = element.Q<AnimCustom>();
+            animCustom.InitAnimCustom(anim.animName, anim.mugshot);
+            animInfoBox.Add(animCustom);
+        }
     }
 
     private void AnimDifBtnAssign(bool setOn)

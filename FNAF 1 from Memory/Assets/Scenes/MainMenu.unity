@@ -384,6 +384,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dc6b9ab1f92f9c14fab359ff50311528, type: 2}
   - {fileID: 11400000, guid: 1acc74730f53ead48a6afc849a7e9707, type: 2}
   CustomDifficulty: {fileID: 0}
+  Anims:
+  - {fileID: 11400000, guid: ecbce96509f692347a99210a48186215, type: 2}
+  - {fileID: 11400000, guid: 07fb0049e238e9f44a9cdf34e72a6e2e, type: 2}
+  - {fileID: 11400000, guid: 7e329787b8563574b9f685d80019509d, type: 2}
+  - {fileID: 11400000, guid: 25c611ed002122a44843af01c014ff91, type: 2}
+  - {fileID: 11400000, guid: be24f2ed38ff97b4bba68e375ff7ef7e, type: 2}
   isGameOver: 0
   inputSystem: {fileID: 1696692866}
   point:
@@ -598,6 +604,7 @@ MonoBehaviour:
   mainObj: {fileID: 292296504}
   customObj: {fileID: 1382933368}
   starSprite: {fileID: 0}
+  animCustomAsset: {fileID: 9197481963319205126, guid: 48915087873bb574eb2952b1642a04f5, type: 3}
 --- !u!4 &1944537376
 Transform:
   m_ObjectHideFlags: 0

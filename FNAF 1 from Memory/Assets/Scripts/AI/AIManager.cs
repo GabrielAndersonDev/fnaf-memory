@@ -23,8 +23,6 @@ public class AIManager : MonoBehaviour
 
     public AnimDifficulty animDifficulty;
 
-    public AnimData[] animatronics;
-
     public Dictionary<AnimatronicEnum, AnimData> AnimEnumToDataDictionary;
     public Dictionary<AnimatronicEnum, CamEnum> AnimLocations;
 
@@ -32,6 +30,7 @@ public class AIManager : MonoBehaviour
 
     public int foxyStage;
     public bool foxyAlreadySeen;
+    public bool isGFreddyActive;
 
     public readonly static WaitForSeconds waitForSeconds5 = new(5f);
     public readonly static WaitForSeconds waitForSeconds7 = new(7f);
@@ -70,11 +69,13 @@ public class AIManager : MonoBehaviour
         PopulateAnimDictionaries();
         BeginAnimCoroutines();
 
+        isGFreddyActive = false;
+
         PowerManager.Singleton.PowerOutage += OnOutage;
         GameManager.Singleton.KillPlayer += OnNightEnd;
         GameManager.Singleton.NightWin += OnNightEnd;
         CamsManager.Singleton.OnCamSwitch += CheckCamState;
-        CamsManager.Singleton.OnCamFlip += CheckFoxyCamFlip;
+        CamsManager.Singleton.OnCamFlip += CheckCamFlip;
     }
 
     private void OnDisable()
@@ -83,14 +84,14 @@ public class AIManager : MonoBehaviour
         GameManager.Singleton.KillPlayer -= OnNightEnd;
         GameManager.Singleton.NightWin -= OnNightEnd;
         CamsManager.Singleton.OnCamSwitch -= CheckCamState;
-        CamsManager.Singleton.OnCamFlip -= CheckFoxyCamFlip;
+        CamsManager.Singleton.OnCamFlip -= CheckCamFlip;
     }
 
     private void BeginAnimCoroutines()
     {
-        AnimCoroutines = new Coroutine[animatronics.Length];
+        AnimCoroutines = new Coroutine[GameManager.Singleton.Anims.Length];
 
-        foreach (AnimData anim in animatronics)
+        foreach (AnimData anim in GameManager.Singleton.Anims)
         {
             if (anim.animatronic == AnimatronicEnum.GoldenFreddy)
             {
@@ -135,7 +136,7 @@ public class AIManager : MonoBehaviour
         AnimLocations = new Dictionary<AnimatronicEnum, CamEnum>();
         AnimEnumToDataDictionary = new();
 
-        foreach (var anim in animatronics)
+        foreach (var anim in GameManager.Singleton.Anims)
         {
             AnimLocations.Add(anim.animatronic, anim.startLocation);
             AnimEnumToDataDictionary.Add(anim.animatronic, anim);
@@ -190,9 +191,16 @@ public class AIManager : MonoBehaviour
             SwapFoxyRoutine(true, true);
         }
 
+        if (isGFreddyActive
+            && cam != CamEnum.Janitor)
+        {
+            isGFreddyActive = false;
+        }
+
         foreach (AnimatronicEnum anim in anims)
         {
-            if (anim == AnimatronicEnum.Foxy) continue;
+            if (anim == AnimatronicEnum.Foxy
+                || anim == AnimatronicEnum.GoldenFreddy) continue;
 
             AnimCoroutineSwitch(anim, true);
         }
@@ -235,12 +243,40 @@ public class AIManager : MonoBehaviour
     }
 
     // triggered whenever the cam flips up or down
-    public void CheckFoxyCamFlip(bool isCamUp)
+    public void CheckCamFlip(bool isCamUp)
     {
         if (foxyStage != 4)
         {
             SwapFoxyRoutine(false, isCamUp);
         }
+
+        if (isGFreddyActive)
+        {
+            Debug.Log("In check flip isGFreddyActive");
+            if (isCamUp)
+            {
+                Debug.Log("Turning GFreddy off");
+                GFreddyOff();
+                isGFreddyActive = false;
+                return;
+            }
+            Debug.Log("Starting gfred");
+            AnimCoroutineSwitch(AnimatronicEnum.GoldenFreddy, false);
+        }
+    }
+
+    public void GFreddyStart()
+    {
+        isGFreddyActive = true;
+    }
+
+    public void GFreddyOff()
+    {
+        StopCoroutine(AnimCoroutines[(int)AnimatronicEnum.GoldenFreddy]);
+        OfficeManager.Singleton.GFreddyToggle(false);
+
+        if (AnimCoroutines[(int)AnimatronicEnum.GoldenFreddy] != null) AnimCoroutines[(int)AnimatronicEnum.GoldenFreddy] = null;
+        UpdateAnimLocation(AnimatronicEnum.GoldenFreddy, CamEnum.Janitor);
     }
 
     private void OnOutage()

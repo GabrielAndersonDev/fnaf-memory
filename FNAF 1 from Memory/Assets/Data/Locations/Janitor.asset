@@ -25,3 +25,4 @@ MonoBehaviour:
   foxySprites: []
   events:
   - {fileID: 11400000, guid: cf6c822d2910d4f459e90dd74245eb21, type: 2}
+  - {fileID: 11400000, guid: 4594e7cc6ff627a4ebedd4b7e8631757, type: 2}

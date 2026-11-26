@@ -18,4 +18,5 @@ MonoBehaviour:
   startLocation: 9
   returnLocation: 7
   usableLocations: 0100000002000000040000000600000007000000090000000b0000000a0000000d000000
+  mugshot: {fileID: 21300000, guid: 50bf7ce029e6b084eb0d4924b913e0c3, type: 3}
   difficulty: 11

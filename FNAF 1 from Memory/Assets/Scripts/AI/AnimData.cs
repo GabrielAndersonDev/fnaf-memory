@@ -11,6 +11,7 @@ public abstract class AnimData : ScriptableObject
     public CamEnum startLocation;
     public CamEnum returnLocation;
     public CamEnum[] usableLocations;
+    public Sprite mugshot;
 
     public int difficulty;
 

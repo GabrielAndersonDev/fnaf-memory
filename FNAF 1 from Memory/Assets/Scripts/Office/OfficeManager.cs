@@ -34,6 +34,9 @@ public class OfficeManager : MonoBehaviour
     Sprite outageOffice;
 
     [SerializeField]
+    SpriteRenderer officeOverlayRenderer;
+
+    [SerializeField]
     Camera mainCamera;
 
     [SerializeField]
@@ -159,6 +162,18 @@ public class OfficeManager : MonoBehaviour
         else
         {
             rightDoor.SetSprites(true, isOn);
+        }
+    }
+
+    public void GFreddyToggle(bool toggle)
+    {
+        if (toggle)
+        {
+            officeOverlayRenderer.sprite = GameManager.Singleton.Anims[(int)AnimatronicEnum.GoldenFreddy].mugshot;
+        }
+        else
+        {
+            officeOverlayRenderer.sprite = null;
         }
     }
 

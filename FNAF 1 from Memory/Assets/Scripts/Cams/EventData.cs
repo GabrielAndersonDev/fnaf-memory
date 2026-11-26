@@ -25,7 +25,7 @@ public class EventData : ScriptableObject
     public int[] eventRates;
     public Sprite[] eventSprites;
 
-    public Sprite EventRoll()
+    public virtual Sprite EventRoll()
     {
         if (eventRates.Length < 1 || eventSprites.Length < 1)
         {
