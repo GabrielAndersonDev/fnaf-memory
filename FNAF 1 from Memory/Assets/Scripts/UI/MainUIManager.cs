@@ -201,6 +201,11 @@ public class MainUIManager : MonoBehaviour
         }
     }
 
+    private void PopulateAnimCustom()
+    {
+        foreach ()
+    }
+
     private void AnimDifBtnAssign(bool setOn)
     {
         foreach (Box difBox in difBoxes)
