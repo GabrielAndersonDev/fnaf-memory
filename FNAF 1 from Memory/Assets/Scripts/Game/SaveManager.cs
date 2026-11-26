@@ -117,10 +117,10 @@ public class SaveManager : MonoBehaviour
         {
             AnimDifficulty dif = GameManager.Singleton.CustomDifficulty;
 
-            if (dif.bonnie == 20
-                && dif.chica == 20
-                && dif.freddy == 20
-                && dif.foxy == 20)
+            if (dif.difficulty[0] == 20
+                && dif.difficulty[1] == 20
+                && dif.difficulty[2] == 20
+                && dif.difficulty[3] == 20)
             {
                 nightSaved = 7;
             }

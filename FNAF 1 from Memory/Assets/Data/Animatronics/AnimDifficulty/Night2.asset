@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: Night2
   m_EditorClassIdentifier: Assembly-CSharp::AnimDifficulty
   night: 2
-  freddy: 0
-  bonnie: 5
-  chica: 4
-  foxy: 2
+  difficulty: 03000000020000000000000002000000

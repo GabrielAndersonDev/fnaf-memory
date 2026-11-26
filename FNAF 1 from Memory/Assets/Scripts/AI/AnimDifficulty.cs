@@ -4,8 +4,11 @@ using UnityEngine;
 public class AnimDifficulty : ScriptableObject
 {
     public int night;
-    public int freddy;
-    public int bonnie;
-    public int chica;
-    public int foxy;
+    public int[] difficulty;
+
+    public void InitDifficulty(int night, int[] difficulties)
+    {
+        this.night = night;
+        difficulty = difficulties;
+    }
 }
