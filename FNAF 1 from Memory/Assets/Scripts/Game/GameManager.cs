@@ -77,24 +77,19 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
-    public void StartCustomNight(int bonnie, int chica, int freddy, int foxy)
+    public void StartCustomNight(AnimDifficulty difficulty)
     {
-        if (bonnie == 1
-            && chica == 9
-            && freddy == 8
-            && foxy == 7)
+        if (difficulty.difficulty[0] == 1
+            && difficulty.difficulty[1] == 9
+            && difficulty.difficulty[2] == 8
+            && difficulty.difficulty[3] == 7)
         {
             GoldenFreddyKill();
             return;
         }
-        
-        CustomDifficulty.night = 7;
-        CustomDifficulty.bonnie = bonnie;
-        CustomDifficulty.freddy = freddy;
-        CustomDifficulty.chica = chica;
-        CustomDifficulty.foxy = foxy;
 
-        StartGame(7);
+        CustomDifficulty = difficulty;
+        StartGame(difficulty.night);
     }
 
     public void OnKillPlayer()

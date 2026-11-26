@@ -258,10 +258,7 @@ public class MainUIManager : MonoBehaviour
 
     private void OnCustomStartBtn()
     {
-        int bonnie = 0;
-        int chica =  0;
-        int foxy = 0;
-        int freddy = 0;
+        List<int> difficulties = new();
 
         foreach (Box difBox in difBoxes)
         {
@@ -269,33 +266,19 @@ public class MainUIManager : MonoBehaviour
 
             if (int.TryParse(difElement.text, out int dif))
             {
-                if (difElement.ClassListContains("bonnie"))
-                {
-                    bonnie = dif;
-                    continue;
-                }
-
-                if (difElement.ClassListContains("chica"))
-                {
-                    chica = dif;
-                    continue;
-                }
-
-                if (difElement.ClassListContains("freddy"))
-                {
-                    freddy = dif;
-                    continue;
-                }
-
-                if (difElement.ClassListContains("foxy"))
-                {
-                    foxy = dif;
-                    continue;
-                }
+                difficulties.Add(dif);
+            }
+            else
+            {
+                Debug.LogError("MainUIManager: Failed to parse text for difficulty.");
+                Debug.Break();
             }
         }
 
-        GameManager.Singleton.StartCustomNight(bonnie, chica, freddy, foxy);
+        AnimDifficulty difficulty = AnimDifficulty.CreateInstance<AnimDifficulty>();
+        difficulty.InitDifficulty(7, difficulties.ToArray());
+
+        GameManager.Singleton.StartCustomNight(difficulty);
     }
 
     private void OnDisable()

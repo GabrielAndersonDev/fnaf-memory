@@ -28,11 +28,7 @@ public class AIManager : MonoBehaviour
     public Dictionary<AnimatronicEnum, AnimData> AnimEnumToDataDictionary;
     public Dictionary<AnimatronicEnum, CamEnum> AnimLocations;
 
-    private Coroutine BonnieRoutine;
-    private Coroutine ChicaRoutine;
-    private Coroutine FreddyRoutine;
-    private Coroutine FoxyRoutine;
-    private Coroutine GFreddyRoutine;
+    private Coroutine[] AnimCoroutines;
 
     public int foxyStage;
     public bool foxyAlreadySeen;
@@ -92,76 +88,45 @@ public class AIManager : MonoBehaviour
 
     private void BeginAnimCoroutines()
     {
+        AnimCoroutines = new Coroutine[animatronics.Length];
+
         foreach (AnimData anim in animatronics)
         {
-            switch (anim.animatronic)
+            if (anim.animatronic == AnimatronicEnum.GoldenFreddy)
             {
-                case AnimatronicEnum.Bonnie:
-                    anim.InitAnim(animDifficulty.bonnie);
-                    break;
-                case AnimatronicEnum.Freddy:
-                    anim.InitAnim(animDifficulty.freddy);
-                    break;
-                case AnimatronicEnum.Chica:
-                    anim.InitAnim(animDifficulty.chica);
-                    break;
-                case AnimatronicEnum.Foxy:
-                    anim.InitAnim(animDifficulty.foxy);
-                    break;
-                case AnimatronicEnum.GoldenFreddy:
-                    break;
-                default:
-                    Debug.LogError("AIManager: invalid animatronic in AnimData.");
-                    Debug.Break();
-                    break;
+                continue;
             }
 
-            AnimCoroutineSwitch(anim.animatronic, false);
+            try 
+            {
+                int difficulty = animDifficulty.difficulty[(int)anim.animatronic];
+                anim.InitAnim(difficulty);
+                AnimCoroutineSwitch(anim.animatronic, false);
+            }
+            catch
+            {
+                Debug.LogError("AIManager: Failed to initialize anim coroutines.");
+                Debug.Break();
+            }
         }
     }
 
     private void AnimCoroutineSwitch(AnimatronicEnum anim, bool isStall)
     {
-        switch (anim)
+        try
         {
-            case AnimatronicEnum.Bonnie:
-                if (BonnieRoutine != null)
-                {
-                    StopCoroutine(BonnieRoutine);
-                    BonnieRoutine = null;
-                }
-                BonnieRoutine ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, isStall, waitForSeconds7));
-                break;
-            case AnimatronicEnum.Freddy:
-                if (FreddyRoutine != null)
-                {
-                    StopCoroutine(FreddyRoutine);
-                    FreddyRoutine = null;
-                }
-                FreddyRoutine ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, isStall, waitForSeconds7));
-                break;
-            case AnimatronicEnum.Chica:
-                if (ChicaRoutine != null)
-                {
-                    StopCoroutine(ChicaRoutine);
-                    ChicaRoutine = null;
-                }
-                ChicaRoutine ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, isStall, waitForSeconds7));
-                break;
-            case AnimatronicEnum.Foxy:
-                if (FoxyRoutine != null)
-                {
-                    StopCoroutine(FoxyRoutine);
-                    FoxyRoutine = null;
-                }
-                FoxyRoutine ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, isStall, waitForSeconds7));
-                break;
-            case AnimatronicEnum.GoldenFreddy:
-                break;
-            default:
-                Debug.LogError("AIManager: invalid animatronic in AnimData.");
-                Debug.Break();
-                break;
+            if (AnimCoroutines[(int)anim] != null)
+            {
+                StopCoroutine(AnimCoroutines[(int)anim]);
+                AnimCoroutines[(int)anim] = null;
+            }
+
+            AnimCoroutines[(int)anim] ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, false, waitForSeconds7));
+        }
+        catch
+        {
+            Debug.LogError("Failed to restart AnimCoroutine");
+            Debug.Break();
         }
     }
 
@@ -240,7 +205,7 @@ public class AIManager : MonoBehaviour
         if (!isRunRoutine 
             && isCamCheck)
         {
-            if (FoxyRoutine != null) StopCoroutine(FoxyRoutine);
+            if (AnimCoroutines[(int)AnimatronicEnum.Foxy] != null) StopCoroutine(AnimCoroutines[(int)AnimatronicEnum.Foxy]);
             return;
         }
 
@@ -254,8 +219,8 @@ public class AIManager : MonoBehaviour
 
                 if (isCamCheck) foxyAlreadySeen = true;
 
-                if (FoxyRoutine != null) StopCoroutine(FoxyRoutine);
-                FoxyRoutine = StartCoroutine(foxy.FoxyRunRoutine(waitTime));
+                if (AnimCoroutines[(int)AnimatronicEnum.Foxy] != null) StopCoroutine(AnimCoroutines[(int)AnimatronicEnum.Foxy]);
+                AnimCoroutines[(int)AnimatronicEnum.Foxy] = StartCoroutine(foxy.FoxyRunRoutine(waitTime));
             }
             else
             {
@@ -282,9 +247,9 @@ public class AIManager : MonoBehaviour
     {
         StopAllCoroutines();
 
-        if (FreddyRoutine != null) FreddyRoutine = null;
+        if (AnimCoroutines[(int)AnimatronicEnum.Freddy] != null) AnimCoroutines[(int)AnimatronicEnum.Freddy] = null;
 
-        FreddyRoutine ??= StartCoroutine(AnimEnumToDataDictionary[AnimatronicEnum.Freddy].FreddyOutage());
+        AnimCoroutines[(int)AnimatronicEnum.Freddy] ??= StartCoroutine(AnimEnumToDataDictionary[AnimatronicEnum.Freddy].FreddyOutage());
     }
 
     private void OnNightEnd()
