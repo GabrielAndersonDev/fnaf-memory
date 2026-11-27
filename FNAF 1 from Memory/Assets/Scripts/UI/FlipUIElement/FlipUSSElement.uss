@@ -1,4 +1,4 @@
-* {
+/* * {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0);
@@ -12,4 +12,4 @@
 
 #flip-sprite {
 	width: 45%
-}
+} */

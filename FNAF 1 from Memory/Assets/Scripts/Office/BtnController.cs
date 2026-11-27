@@ -19,6 +19,8 @@ public class BtnController : MonoBehaviour
     public bool isPressed;
     public bool isDisabled;
 
+    private Coroutine FlickerRoutine;
+
     PolygonCollider2D polygonCollider;
 
     public void InitBtn(Sprite pressed, Sprite normal)
@@ -56,7 +58,6 @@ public class BtnController : MonoBehaviour
             if (hit.collider == polygonCollider)
             {
                 ButtonPressed();
-                DebugListener();
             }
         }
     }
@@ -64,6 +65,30 @@ public class BtnController : MonoBehaviour
     private void CamListener(bool isUp)
     {
         isDisabled = isUp;
+
+        if (isUp)
+        {
+            if (FlickerRoutine != null)
+            {
+                StopCoroutine(FlickerRoutine);
+                FlickerRoutine = null;
+            }
+
+            spriteRenderer.sprite = null;
+            if (isLight) OfficeManager.Singleton.DoorLightView(isLeft, false);
+        }
+        else
+        {
+            if (isPressed)
+            {
+                spriteRenderer.sprite = pressedSprite;
+                FlickerRoutine ??= StartCoroutine(PressedAnim());
+            }
+            else
+            {
+                spriteRenderer.sprite = normalSprite;
+            }
+        }
     }
 
     private void OnDisable()
@@ -72,11 +97,6 @@ public class BtnController : MonoBehaviour
         StopAllCoroutines();
         PowerManager.Singleton.PowerOutage -= OnOutage;
         CamsManager.Singleton.OnCamFlip -= CamListener;
-    }
-
-    public void DebugListener()
-    {
-        Debug.Log("Button : " + (isLeft ? "left" : "right") + (isLight ? " light" : " door") + " " + (isPressed ? "is active." : "is off."));
     }
 
     public void ButtonPressed()
@@ -88,17 +108,24 @@ public class BtnController : MonoBehaviour
         if (isPressed)
         {
             spriteRenderer.sprite = pressedSprite;
-            StartCoroutine(PressedAnim());
+            FlickerRoutine ??= StartCoroutine(PressedAnim());
         }
         else
         {
+            if (FlickerRoutine != null)
+            {
+                StopCoroutine(FlickerRoutine);
+                FlickerRoutine = null;
+            }
+
             spriteRenderer.sprite = normalSprite;
+            if (isLight) OfficeManager.Singleton.DoorLightView(isLeft, false);
         }
     }
 
     public IEnumerator PressedAnim()
     {
-        while (isPressed)
+        while (true)
         {
             WaitForSeconds waitTime = new(UnityEngine.Random.Range(0.3f, 1f));
             yield return waitTime;
@@ -113,11 +140,6 @@ public class BtnController : MonoBehaviour
             spriteRenderer.sprite = pressedSprite;
             if (isLight) OfficeManager.Singleton.DoorLightView(isLeft, true);
         }
-
-        spriteRenderer.sprite = normalSprite;
-        if (isLight) OfficeManager.Singleton.DoorLightView(isLeft, false);
-
-        yield return null;
     }
 
     private void OnOutage()

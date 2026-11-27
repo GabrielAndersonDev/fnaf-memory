@@ -1,17 +1,18 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/UI/MainMenuUI/MainUSS.uss?fileID=7433441132597879392&amp;guid=66505e2250c09904fabea407319242ef&amp;type=3#MainUSS"/>
     <ui:VisualElement name="root">
-        <ui:TextElement name="title" text="Five Nights At Freddy's" />
-        <ui:Box name="nav">
-            <ui:Box name="start-game-box">
-                <ui:Button name="start-game-btn" text="New Game" />
-                <ui:TextElement name="night-text" text="" />
+        <ui:Box name="main-holder">
+            <ui:TextElement name="title" text="&lt;line-height=125%&gt;Five Nights At Freddy's&lt;/line-height&gt;" />
+            <ui:Box name="nav">
+                <ui:Button name="start-game-btn" text="New Game">
+                    <ui:TextElement name="night-text" text="" />
+                </ui:Button>
+                <ui:Button name="night-six-btn" text="Night 6" />
+                <ui:Button name="custom-night-btn" text="Custom Night" />
+                <ui:Button name="quit-game-btn" text="Quit" />
             </ui:Box>
-            <ui:Button name="night-six-btn" text="Night 6" />
-            <ui:Button name="custom-night-btn" text="Custom Night" />
-            <ui:Button name="quit-game-btn" text="Quit" />
-        </ui:Box>
-        <ui:Box name="star-box">
+            <ui:Box name="star-box">
+            </ui:Box>
         </ui:Box>
         <ui:TextElement name="del-info-text" text="Hold DEL to delete save data." />
     </ui:VisualElement>

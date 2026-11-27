@@ -29,6 +29,7 @@ public class GameUIManager : MonoBehaviour
     TextElement powerText;
     Box powerUseSpriteContainer;
     TextElement hourText;
+    TextElement nightText;
 
     TextElement currentCamText;
 
@@ -72,6 +73,7 @@ public class GameUIManager : MonoBehaviour
         powerText = baseGameUI.Q<TextElement>("power-text");
         powerUseSpriteContainer = baseGameUI.Q<Box>("power-use-sprite-container");
         hourText = baseGameUI.Q<TextElement>("hour-text");
+        nightText = baseGameUI.Q<TextElement>("night-text");
 
         flipContainer = baseGameUI.Q<Box>("flip-container");
 
@@ -98,6 +100,8 @@ public class GameUIManager : MonoBehaviour
 
         UpdateHour(12);
         NightManager.Singleton.HourChange += UpdateHour;
+
+        nightText.text = "Night " + GameManager.Singleton.night.ToString();
 
         GameManager.Singleton.KillPlayer += OnGameEnd;
         GameManager.Singleton.NightWin += OnGameEnd;
@@ -198,20 +202,17 @@ public class GameUIManager : MonoBehaviour
 
         CamData camData = CamsManager.Singleton.EnumCamsDictionary[cam];
         currentCamText.text = camData.CamName;
-        Sprite baseCamSprite = camData.emptyCam;
         List<Sprite> animSprites = new();
 
         if (cam == CamEnum.PirateCove)
         {
-            camSprite.sprite = camData.foxySprites[foxyStage];
             return;
         }
 
         if (cam == CamEnum.LHallway
             && anims.Contains(AnimatronicEnum.Foxy))
         {
-            camSprite.sprite = baseCamSprite;
-
+            // Play foxy running anim
             Debug.LogError("Play Foxy running anim, unimplemented rn");
             return;
         }
@@ -226,32 +227,23 @@ public class GameUIManager : MonoBehaviour
 
         foreach (EventData e in events)
         {
+            if (e.eventType != EventType.Single)
+            {
+                Debug.LogError("GameUIManager: wrong event type.");
+                Debug.Break();
+            }
+
             Sprite spriteRoll = e.EventRoll();
 
             if (spriteRoll != null)
             {
-                switch (e.eventType)
+                for (var i = 0; i < anims.Length; i++)
                 {
-                    case (EventType.Background):
-                        baseCamSprite = spriteRoll;
+                    if (anims[i] == e.animsInvolved[0])
+                    {
+                        animSprites[i] = spriteRoll;
                         break;
-                    case (EventType.Override):
-                        camSprite.sprite = spriteRoll;
-                        return;
-                    case (EventType.Single):
-                        for (var i = 0; i < anims.Length; i++)
-                        {
-                            if (anims[i] == e.animsInvolved[0])
-                            {
-                                animSprites[i] = spriteRoll;
-                                break;
-                            }
-                        }
-                        break;
-                    default:
-                        Debug.LogError("GameUIManager: EventType in event " + e.eventName + " was invalid.");
-                        Debug.Break();
-                        break;
+                    }
                 }
             }
         }
@@ -267,18 +259,16 @@ public class GameUIManager : MonoBehaviour
 
             camSpriteContainer.Add(animSprite);
         }
-
-        camSprite.sprite = baseCamSprite;
     }
 
     private void UpdatePower(int newPower) 
     {
-        powerText.text = newPower.ToString();
+        powerText.text = newPower.ToString() + "%";
     }
 
     private void UpdateHour(int newHour)
     {
-        hourText.text = newHour.ToString();
+        hourText.text = newHour.ToString() + " AM";
     }
 
     public void PlayJumpscare(AnimatronicEnum anim, bool isCamUp)

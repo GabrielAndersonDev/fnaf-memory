@@ -1,13 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Scripts/UI/AnimCustomElement/AnimCustomUSS.uss?fileID=7433441132597879392&amp;guid=f2077c1b1c7b590499b6906d3430fcd5&amp;type=3#AnimCustomUSS"/>
     <AnimCustom>
         <ui:Box name="anim-custom-box" class="anim-box">
-            <ui:TextElement name="name-text" class="anim-name" text="" />
-            <ui:Image name="anim-img" class="anim-img" src="" />
+            <ui:Image name="anim-img" src="" class="anim-img"/>
+            <ui:TextElement name="name-text" text="" class="anim-name"/>
             <ui:Box name="dif-box" class="dif-box">
-                <ui:Button name="down-btn" class="down-btn" />
-                <ui:TextElement name="dif-text" class="dif" text="0" />
-                <ui:Button name="up-btn" class="up-btn" />
+                <ui:Button name="down-btn" text="&lt;" class="down-btn dif-btn"/>
+                <ui:TextElement name="dif-text" text="0" class="dif"/>
+                <ui:Button name="up-btn" text="&gt;" class="up-btn dif-btn"/>
             </ui:Box>
         </ui:Box>
     </AnimCustom>

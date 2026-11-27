@@ -24,6 +24,7 @@
 
 #hour-text {
 	-unity-text-align: upper-right;
+	font-size: 30px;
 }
 
 #power-container {
@@ -34,5 +35,15 @@
 
 #flip-container {
 	bottom: 0;
-	left: 48%;
+	width: 45%;
+	height: 12%;
+	left: 15%;
+}
+
+#night-text {
+	font-size: 22px;
+}
+
+#power-text {
+	font-size: 30px;
 }

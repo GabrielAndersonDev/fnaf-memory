@@ -34,6 +34,8 @@
 
 #cam-sprite, #cam-sprite-container, #cam-sprite-container Image {
 	position: absolute;
+	width: 100%;
+	height: 100%;
 }
 
 #cams {

@@ -13,6 +13,8 @@ public class SaveData
 
 public class SaveManager : MonoBehaviour
 {
+    [SerializeField]
+    private bool devOverride;
     public static SaveManager Singleton { get; private set; }
     public bool isNewSave;
 
@@ -66,6 +68,14 @@ public class SaveManager : MonoBehaviour
 
     private void LoadSaveData()
     {
+        if (devOverride)
+        {
+            Debug.Log("DevOverride enabled");
+            nightSaved = 7;
+            isNewSave = false;
+            return;
+        }
+
         Debug.Log("Loading save data");
         try
         {

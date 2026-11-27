@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,7 +15,6 @@ public class MainUIManager : MonoBehaviour
     GameObject customObj;
     VisualElement customUI;
 
-    Box startGameBox;
     Button startGameBtn;
     TextElement nightText;
 
@@ -31,6 +31,9 @@ public class MainUIManager : MonoBehaviour
 
     Button customBackBtn;
     Button customStartBtn;
+
+    FreddyMenu freddyMenu;
+    private Coroutine FreddyRoutine;
 
     [SerializeField]
     VisualTreeAsset animCustomAsset;
@@ -58,7 +61,6 @@ public class MainUIManager : MonoBehaviour
         mainUI = mainObj.GetComponent<UIDocument>().rootVisualElement;
         customUI = customObj.GetComponent<UIDocument>().rootVisualElement;
 
-        startGameBox = mainUI.Q<Box>("start-game-box");
         startGameBtn = mainUI.Q<Button>("start-game-btn");
         nightText = mainUI.Q<TextElement>("night-text");
 
@@ -69,15 +71,24 @@ public class MainUIManager : MonoBehaviour
         starBox = mainUI.Q<Box>("star-box");
 
         animInfoBox = customUI.Q<Box>("anim-info-box");
-        difBoxes = customUI.Query<Box>(className: "dif-box").ToList();
+        PopulateAnimCustom();
 
         customBackBtn = customUI.Q<Button>("back-btn");
         customStartBtn = customUI.Q<Button>("custom-start-btn");
 
+        try
+        {
+            freddyMenu = GetComponentInChildren<FreddyMenu>();
+        }
+        catch
+        {
+            Debug.LogError("MainUIMenu: Failed to find freddyMenu in children.");
+            Debug.Break();
+        }
+        
         CheckNightInfo();
         SetStarCount();
         SetButtonFunctions();
-        PopulateAnimCustom();
         ToggleCustomNight(false);
     }
 
@@ -135,6 +146,7 @@ public class MainUIManager : MonoBehaviour
         {
             mainUI.SetEnabled(false);
             mainUI.style.display = DisplayStyle.None;
+            ToggleFreddyMenu(false);
 
             customUI.SetEnabled(true);
             customUI.style.display = DisplayStyle.Flex;
@@ -143,6 +155,7 @@ public class MainUIManager : MonoBehaviour
         {
             mainUI.SetEnabled(true);
             mainUI.style.display = DisplayStyle.Flex;
+            ToggleFreddyMenu(true);
 
             customUI.SetEnabled(false);
             customUI.style.display = DisplayStyle.None;
@@ -218,6 +231,8 @@ public class MainUIManager : MonoBehaviour
             animCustom.InitAnimCustom(anim.animName, anim.mugshot);
             animInfoBox.Add(animCustom);
         }
+
+        difBoxes = animInfoBox.Query<Box>(className: "dif-box").ToList();
     }
 
     private void AnimDifBtnAssign(bool setOn)
@@ -293,6 +308,24 @@ public class MainUIManager : MonoBehaviour
         difficulty.InitDifficulty(7, difficulties.ToArray());
 
         GameManager.Singleton.StartCustomNight(difficulty);
+    }
+
+    private void ToggleFreddyMenu(bool toggle)
+    {
+        if (toggle)
+        {
+            FreddyRoutine ??= StartCoroutine(freddyMenu.MainBackgroundAnim());
+        }
+        else
+        {
+            if (FreddyRoutine != null)
+            {
+                StopCoroutine(FreddyRoutine);
+                FreddyRoutine = null;
+            }
+
+            freddyMenu.DisableFreddyBG();
+        }
     }
 
     private void OnDisable()

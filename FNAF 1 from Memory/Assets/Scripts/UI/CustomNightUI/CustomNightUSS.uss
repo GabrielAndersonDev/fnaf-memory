@@ -1,1 +1,75 @@
-VisualElement {}
+* {
+	background-color: rgba(0, 0, 0, 0);
+	border-color: rgba(0, 0, 0, 0);
+	color: white;
+}
+
+#root {
+	height: 100%;
+	width: 100%;
+}
+
+#title {
+	font-size: 60px;
+	width: 100%;
+	-unity-text-align: middle-center;
+	margin-top: 5%;
+}
+
+#anim-info-box {
+	flex-direction: row;
+	justify-content: space-around;
+	align-content: center;
+	align-items: center;
+	padding-left: 8%;
+	padding-right: 8%;
+}
+
+#nav-btn-box {
+	width: 100%;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-left: 10%;
+	padding-right: 10%;
+	margin-bottom: 3%;
+	font-size: 20px;
+}
+
+#nav-btn-box Button {
+	width: 20%;
+}
+
+AnimCustom {
+	height: 65%;
+}
+
+.dif-box {
+	padding-left: 20px;
+	padding-right: 20px;
+	flex-direction: row;
+	align-content: center;
+	justify-content: space-between;
+}
+
+.dif-btn {
+	font-size: 60px;
+}
+
+.dif {
+	width: 20%;
+	font-size: 60px;
+}
+
+.anim-name {
+	font-size: 25px;
+}
+
+.anim-name, .dif {
+	-unity-text-align: middle-center;
+}
+
+Button {
+	-unity-text-align: middle-center;
+	background-color: rgba(0, 0, 0, 1);
+	border-color: rgba(0, 0, 0, 1);
+}

@@ -61,6 +61,7 @@ public class OfficeManager : MonoBehaviour
     private void Start()
     {
         PowerManager.Singleton.PowerOutage += OnOutage;
+        AIManager.Singleton.GFreddyInOffice += GFreddyToggle;
 
         AssignButtons();
     }
@@ -97,6 +98,7 @@ public class OfficeManager : MonoBehaviour
     private void OnDisable()
     {
         PowerManager.Singleton.PowerOutage -= OnOutage;
+        AIManager.Singleton.GFreddyInOffice -= GFreddyToggle;
     }
 
     // mouse position set

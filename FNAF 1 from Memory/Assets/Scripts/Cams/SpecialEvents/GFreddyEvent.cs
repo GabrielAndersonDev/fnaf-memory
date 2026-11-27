@@ -26,8 +26,11 @@ public class GFreddyEvent : EventData
             {
                 if (i == 1)
                 {
-                    AIManager.Singleton.GFreddyStart();
-                    Debug.Log("Is GFreddy active: " + AIManager.Singleton.isGFreddyActive);
+                    AIManager.Singleton.isGFreddyEvent = true;
+                }
+                else
+                {
+                    AIManager.Singleton.isGFreddyEvent = false;
                 }
                 
                 return eventSprites[i];

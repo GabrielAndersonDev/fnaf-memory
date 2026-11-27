@@ -1,1 +1,65 @@
-VisualElement {}
+* {
+	background-color: rgba(0, 0, 0, 0);
+	border-color: rgba(0, 0, 0, 0);
+	color: white;
+}
+
+#root {
+	height: 100%;
+	width: 100%;
+}
+
+#main-holder {
+	height: 100%;
+	width: 38%;
+	margin-left: 4%;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+#title {
+	-unity-text-generator: advanced;
+	-unity-text-auto-size: best-fit 55px 75px;
+	-unity-text-align: lower-left;
+	width: 100%;
+	height: 45%;
+	margin-top: 10%;
+	padding-bottom: 10%;
+}
+
+#del-info-text {
+	width: 100%;
+	-unity-text-align: middle-right;
+}
+
+#nav {
+	height: 50%;
+
+}
+
+Button {
+	-unity-text-align: middle-left;
+	-unity-text-generator: advanced;
+	-unity-text-auto-size: best-fit 25px 45px;
+	align-self: flex-start;
+	height: 25%;
+	width: auto;
+}
+
+#start-game-btn {
+	width: 100%;
+}
+
+#night-text {
+	width: 100%;
+	height: 25%;
+	-unity-text-generator: advanced;
+	-unity-text-auto-size: best-fit 10px 30px;
+	position: absolute;
+	-unity-text-align: lower-left;
+	padding-left: 7%;
+}
+
+#star-box {
+	height: 6%;
+}

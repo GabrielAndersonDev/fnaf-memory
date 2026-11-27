@@ -36,6 +36,7 @@ public class DoorController : MonoBehaviour
         AIManager.Singleton.AnimAtDoor += AnimatronicCheck;
         OfficeManager.Singleton.BtnPressed += ToggleDoor;
         PowerManager.Singleton.PowerOutage += OnOutage;
+        CamsManager.Singleton.OnCamFlip += OnCamFlip;
 
         doorSpriteRenderer.sprite = openDoor;
     }
@@ -45,6 +46,7 @@ public class DoorController : MonoBehaviour
         AIManager.Singleton.AnimAtDoor -= AnimatronicCheck;
         OfficeManager.Singleton.BtnPressed -= ToggleDoor;
         PowerManager.Singleton.PowerOutage -= OnOutage;
+        CamsManager.Singleton.OnCamFlip -= OnCamFlip;
     }
 
     private void AnimatronicCheck(bool isLeft, bool isThere)
@@ -110,6 +112,18 @@ public class DoorController : MonoBehaviour
         else
         {
             animSpriteRenderer.sprite = null;
+        }
+    }
+
+    private void OnCamFlip(bool isUp)
+    {
+        if (isUp)
+        {
+            doorSpriteRenderer.sprite = null;
+        }
+        else
+        {
+            SetSprites(false, isClosed);
         }
     }
 

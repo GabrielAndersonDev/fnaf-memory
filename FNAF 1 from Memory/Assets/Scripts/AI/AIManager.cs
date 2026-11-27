@@ -10,8 +10,8 @@ public enum AnimatronicEnum
     None = -1,
     First,
     Bonnie = First,
-    Freddy,
     Chica,
+    Freddy,
     Foxy,
     GoldenFreddy,
     Max
@@ -30,12 +30,13 @@ public class AIManager : MonoBehaviour
 
     public int foxyStage;
     public bool foxyAlreadySeen;
-    public bool isGFreddyActive;
+    public bool isGFreddyEvent;
 
     public readonly static WaitForSeconds waitForSeconds5 = new(5f);
     public readonly static WaitForSeconds waitForSeconds7 = new(7f);
 
     public event Action<bool, bool> AnimAtDoor;
+    public event Action<bool> GFreddyInOffice;
 
     void Awake()
     {
@@ -69,7 +70,7 @@ public class AIManager : MonoBehaviour
         PopulateAnimDictionaries();
         BeginAnimCoroutines();
 
-        isGFreddyActive = false;
+        isGFreddyEvent = false;
 
         PowerManager.Singleton.PowerOutage += OnOutage;
         GameManager.Singleton.KillPlayer += OnNightEnd;
@@ -98,9 +99,10 @@ public class AIManager : MonoBehaviour
                 continue;
             }
 
-            try 
+            try
             {
                 int difficulty = animDifficulty.difficulty[(int)anim.animatronic];
+                Debug.Log("Difficulty: " + difficulty + ". Anim: " + anim.animName);
                 anim.InitAnim(difficulty);
                 AnimCoroutineSwitch(anim.animatronic, false);
             }
@@ -191,10 +193,10 @@ public class AIManager : MonoBehaviour
             SwapFoxyRoutine(true, true);
         }
 
-        if (isGFreddyActive
+        if (isGFreddyEvent
             && cam != CamEnum.Janitor)
         {
-            isGFreddyActive = false;
+            isGFreddyEvent = false;
         }
 
         foreach (AnimatronicEnum anim in anims)
@@ -250,32 +252,38 @@ public class AIManager : MonoBehaviour
             SwapFoxyRoutine(false, isCamUp);
         }
 
-        if (isGFreddyActive)
-        {
-            Debug.Log("In check flip isGFreddyActive");
-            if (isCamUp)
-            {
-                Debug.Log("Turning GFreddy off");
-                GFreddyOff();
-                isGFreddyActive = false;
-                return;
-            }
-            Debug.Log("Starting gfred");
-            AnimCoroutineSwitch(AnimatronicEnum.GoldenFreddy, false);
-        }
-    }
+        Debug.LogWarning("isCamUp: " + isCamUp + ". isGFreddyEvent: " + isGFreddyEvent);
 
-    public void GFreddyStart()
-    {
-        isGFreddyActive = true;
+        if (isGFreddyEvent
+            && !isCamUp)
+        {
+            AnimCoroutineSwitch(AnimatronicEnum.GoldenFreddy, false);
+            GFreddyInOffice.Invoke(true);
+            isGFreddyEvent = false;
+        }
+        else if (AnimCoroutines[(int)AnimatronicEnum.GoldenFreddy] != null
+            && isCamUp)
+        {
+            GFreddyOff();
+        }
     }
 
     public void GFreddyOff()
     {
-        StopCoroutine(AnimCoroutines[(int)AnimatronicEnum.GoldenFreddy]);
-        OfficeManager.Singleton.GFreddyToggle(false);
+        if (AnimCoroutines[(int)AnimatronicEnum.GoldenFreddy] != null)
+        {
+            StopCoroutine(AnimCoroutines[(int)AnimatronicEnum.GoldenFreddy]);
+            AnimCoroutines[(int)AnimatronicEnum.GoldenFreddy] = null;
+        }
+        else
+        {
+            Debug.LogError("GFreddyOff triggered while coroutine is null.");
+            Debug.Break();
+        }
 
-        if (AnimCoroutines[(int)AnimatronicEnum.GoldenFreddy] != null) AnimCoroutines[(int)AnimatronicEnum.GoldenFreddy] = null;
+        isGFreddyEvent = false;
+        GFreddyInOffice.Invoke(false);
+        OfficeManager.Singleton.GFreddyToggle(false);
         UpdateAnimLocation(AnimatronicEnum.GoldenFreddy, CamEnum.Janitor);
     }
 

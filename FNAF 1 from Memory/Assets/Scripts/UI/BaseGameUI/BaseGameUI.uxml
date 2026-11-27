@@ -3,9 +3,10 @@
     <ui:VisualElement name="root" picking-mode="Ignore">
         <ui:Box name="hour-container" picking-mode="Ignore">
             <ui:TextElement name="hour-text" text="undefined" picking-mode="Ignore" />
+            <ui:TextElement name="night-text" text="undefined" picking-mode="Ignore" />
         </ui:Box>
         <ui:Box name="power-container" picking-mode="Ignore">
-            <ui:TextElement name="power-text" text="100" picking-mode="Ignore" />
+            <ui:TextElement name="power-text" text="100%" picking-mode="Ignore" />
             <ui:Box name="power-use-sprite-container" picking-mode="Ignore">
             </ui:Box>
         </ui:Box>
