@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: FreddyData
   m_EditorClassIdentifier: Assembly-CSharp::Freddy
   animName: Freddy
-  animID: 1
-  animatronic: 1
+  animatronic: 2
   startLocation: 9
   returnLocation: 1
-  usableLocations: 0000000001000000030000000500000007000000090000000a0000000c000000
+  usableLocations: 0000000001000000030000000500000007000000090000000b000000
   mugshot: {fileID: 21300000, guid: b4a7a7f8b749d554fb05fd7bc031d326, type: 3}
   difficulty: 5

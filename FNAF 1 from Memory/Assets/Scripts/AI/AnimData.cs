@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,6 @@ using UnityEngine;
 public abstract class AnimData : ScriptableObject
 {
     public string animName;
-    public int animID;
     public AnimatronicEnum animatronic;
     public CamEnum startLocation;
     public CamEnum returnLocation;
@@ -14,6 +14,7 @@ public abstract class AnimData : ScriptableObject
     public Sprite mugshot;
 
     public int difficulty;
+    public bool isStalled;
 
     // may not be right type, will have to check when implementing
     public AnimationEvent jumpscare;
@@ -25,16 +26,15 @@ public abstract class AnimData : ScriptableObject
 
     public virtual IEnumerator AnimatronicRoutine(WaitForSeconds waitTime, bool stallRun, WaitForSeconds stallTime)
     {
-        bool isStalled = stallRun;
+        isStalled = stallRun;
 
         while (!NightManager.Singleton.isNightOver)
         {
-            Debug.Log("Animatronic " + animName + " is in routine.");
             WaitForSeconds time = isStalled ? stallTime : waitTime;
             
             yield return time;
 
-            int rand = Random.Range(1, 20);
+            int rand = UnityEngine.Random.Range(1, 21);
 
             if (rand <= difficulty)
             {
@@ -48,6 +48,8 @@ public abstract class AnimData : ScriptableObject
     public virtual void Move()
     {
         CamEnum currentCam = AIManager.Singleton.AnimLocations[animatronic];
+
+        // figure out cam weights in proportion to current cam.
 
         switch (currentCam)
         {
@@ -96,23 +98,60 @@ public abstract class AnimData : ScriptableObject
                 Jumpscare(CamsManager.Singleton.inCams);
                 break;
             default:
-                CamData camData = CamsManager.Singleton.EnumCamsDictionary[currentCam];
-
-                List<CamEnum> camList = new();
-
-                foreach (CamEnum cam in camData.connectedCams)
-                {
-                    if (usableLocations.Contains(cam))
-                    {
-                        camList.Add(cam);
-                    }
-                }
-
-                int selectedInt = Random.Range(0, camList.Count - 1);
-
-                AIManager.Singleton.UpdateAnimLocation(animatronic, camList[selectedInt]);
+                AIManager.Singleton.UpdateAnimLocation(animatronic, SelectMoveCam(currentCam));
                 break;
         }
+    }
+
+    public virtual CamEnum SelectMoveCam(CamEnum currentCam)
+    {
+        CamData camData = CamsManager.Singleton.EnumCamsDictionary[currentCam];
+
+        List<CamEnum> camList = new();
+        float difExpo = AIManager.Singleton.difficultyCurve.Evaluate(difficulty);
+
+        float weightTotal = 0f;
+        List<float> camWeightList = new();
+
+        float priorBase = 0;
+
+        // Adds cams based on validity, and totals their weights in same order. First cams should be smaller float.
+        for (int i = 0; i < camData.connectedCams.Length; i++)
+        {
+            if (usableLocations.Contains(camData.connectedCams[i]))
+            {
+                camList.Add(camData.connectedCams[i]);
+
+                float baseWeight = priorBase == 0 ? 1 : (priorBase + priorBase);
+                priorBase = baseWeight;
+                float camWeight = (float)Math.Pow(baseWeight, difExpo);
+
+                weightTotal += camWeight;
+
+                camWeightList.Add(weightTotal);
+            }
+        }
+
+        float randResult = UnityEngine.Random.Range(0f, weightTotal);
+        CamEnum selectedCam = CamEnum.None;
+
+        for (int i = 0; i < camList.Count; i++)
+        {
+            if (randResult < camWeightList[i])
+            {
+                selectedCam = camList[i];
+                break;
+            }
+        }
+
+        if (selectedCam == CamEnum.None)
+        {
+            Debug.LogError("AnimData: Failed to choose new CamEnum locaation.");
+            Debug.Break();
+            return selectedCam;
+        }
+
+        return selectedCam;
     }
 
     public virtual void Jumpscare(bool isCamUp)

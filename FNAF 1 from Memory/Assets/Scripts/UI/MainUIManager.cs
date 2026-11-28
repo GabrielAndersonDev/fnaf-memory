@@ -222,13 +222,22 @@ public class MainUIManager : MonoBehaviour
 
     private void PopulateAnimCustom()
     {
+        //AnimData[] anims = new AnimData[GameManager.Singleton.Anims.Length];
+
+        //foreach (AnimData anim in GameManager.Singleton.Anims)
+        //{
+        //    anims[(int)anim.animatronic] = anim;
+        //}
+
         foreach (AnimData anim in GameManager.Singleton.Anims)
         {
+            Debug.Log(anim.animatronic);
             if (anim.animatronic == AnimatronicEnum.GoldenFreddy) continue;
 
             var element = animCustomAsset.Instantiate();
             AnimCustom animCustom = element.Q<AnimCustom>();
             animCustom.InitAnimCustom(anim.animName, anim.mugshot);
+            Debug.Log(anim.animatronic.ToString());
             animInfoBox.Add(animCustom);
         }
 

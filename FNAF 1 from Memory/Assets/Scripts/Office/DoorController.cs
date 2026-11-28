@@ -119,11 +119,11 @@ public class DoorController : MonoBehaviour
     {
         if (isUp)
         {
-            doorSpriteRenderer.sprite = null;
+            doorSpriteRenderer.enabled = false;
         }
         else
         {
-            SetSprites(false, isClosed);
+            doorSpriteRenderer.enabled = true;
         }
     }
 

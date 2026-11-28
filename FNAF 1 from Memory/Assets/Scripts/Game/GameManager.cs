@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public AnimDifficulty CustomDifficulty;
 
     public AnimData[] Anims;
+    [SerializeField]
+    private AnimData[] baseAnimArr;
 
     public event Action KillPlayer;
     public event Action NightWin;
@@ -44,6 +46,19 @@ public class GameManager : MonoBehaviour
         }
 
         CustomDifficulty = AnimDifficulty.CreateInstance<AnimDifficulty>();
+        AnimsOrder();
+    }
+
+    private void AnimsOrder()
+    {
+        Anims = new AnimData[baseAnimArr.Length];
+
+        foreach (AnimData anim in baseAnimArr)
+        {
+            Debug.Log(anim.animatronic);
+            Debug.Log((int)anim.animatronic);
+            Anims[(int)anim.animatronic] = anim;
+        }
     }
 
     private void OnEnable()

@@ -16,7 +16,7 @@ MonoBehaviour:
   CamName: Bathroom
   cam: 0
   emptyCam: {fileID: 1151682603199598578, guid: e76de264f851f7c45a1abbbc8eaa24e6, type: 3}
-  connectedCams: 070000000300000005000000
+  connectedCams: 030000000700000005000000
   animSpriteDataArr:
   - anim: 1
     sprite: {fileID: 21300000, guid: e33281d8ba11b0d40a9c4867eebfff3a, type: 3}

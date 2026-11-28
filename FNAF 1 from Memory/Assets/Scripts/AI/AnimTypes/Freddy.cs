@@ -10,6 +10,8 @@ public class Freddy : AnimData
     {
         CamEnum currentCam = AIManager.Singleton.AnimLocations[animatronic];
 
+        // Freddy laugh
+
         switch (currentCam)
         {
             case CamEnum.Invalid:
@@ -43,21 +45,7 @@ public class Freddy : AnimData
                 Jumpscare(CamsManager.Singleton.inCams);
                 break;
             default:
-                CamData camData = CamsManager.Singleton.EnumCamsDictionary[currentCam];
-
-                List<CamEnum> camList = new();
-
-                foreach (CamEnum cam in camData.connectedCams)
-                {
-                    if (usableLocations.Contains(cam))
-                    {
-                        camList.Add(cam);
-                    }
-                }
-
-                int selectedInt = Random.Range(0, camList.Count - 1);
-
-                AIManager.Singleton.UpdateAnimLocation(animatronic, camList[selectedInt]);
+                AIManager.Singleton.UpdateAnimLocation(animatronic, SelectMoveCam(currentCam));
                 break;
         }
     }

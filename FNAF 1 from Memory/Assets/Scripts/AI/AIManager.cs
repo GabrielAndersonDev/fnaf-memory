@@ -22,6 +22,7 @@ public class AIManager : MonoBehaviour
     public static AIManager Singleton { get; private set; }
 
     public AnimDifficulty animDifficulty;
+    public AnimationCurve difficultyCurve;
 
     public Dictionary<AnimatronicEnum, AnimData> AnimEnumToDataDictionary;
     public Dictionary<AnimatronicEnum, CamEnum> AnimLocations;
@@ -118,13 +119,18 @@ public class AIManager : MonoBehaviour
     {
         try
         {
+            if (AnimEnumToDataDictionary[anim].isStalled)
+            {
+                return;
+            }
+
             if (AnimCoroutines[(int)anim] != null)
             {
                 StopCoroutine(AnimCoroutines[(int)anim]);
                 AnimCoroutines[(int)anim] = null;
             }
 
-            AnimCoroutines[(int)anim] ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, false, waitForSeconds7));
+            AnimCoroutines[(int)anim] ??= StartCoroutine(AnimEnumToDataDictionary[anim].AnimatronicRoutine(waitForSeconds5, isStall, waitForSeconds7));
         }
         catch
         {
@@ -208,15 +214,17 @@ public class AIManager : MonoBehaviour
         }
     }
 
-    public void SwapFoxyRoutine(bool isRunRoutine, bool isCamCheck)
+    public void SwapFoxyRoutine(bool isRunRoutine, bool isCamUp)
     {
-        Debug.Log("SwapFoxyRoutine ran: isRunRoutine: " + isRunRoutine + " isCamCheck: " + isCamCheck);
-
-        if (!isRunRoutine 
-            && isCamCheck)
+        if (!isRunRoutine
+            && isCamUp)
         {
-            if (AnimCoroutines[(int)AnimatronicEnum.Foxy] != null) StopCoroutine(AnimCoroutines[(int)AnimatronicEnum.Foxy]);
-            return;
+            if (AnimCoroutines[(int)AnimatronicEnum.Foxy] != null)
+            {
+                StopCoroutine(AnimCoroutines[(int)AnimatronicEnum.Foxy]);
+                AnimCoroutines[(int)AnimatronicEnum.Foxy] = null;
+                return;
+            }
         }
 
         if (AnimEnumToDataDictionary.TryGetValue(AnimatronicEnum.Foxy, out AnimData anim))
@@ -225,12 +233,17 @@ public class AIManager : MonoBehaviour
             {
                 Foxy foxy = (Foxy)anim;
 
-                WaitForSeconds waitTime = isCamCheck ? new(3f) : waitForSeconds5;
+                WaitForSeconds waitTime = isCamUp ? new(3f) : waitForSeconds5;
 
-                if (isCamCheck) foxyAlreadySeen = true;
+                if (isCamUp && CamsManager.Singleton.currentCam == CamEnum.LHallway) foxyAlreadySeen = true;
 
-                if (AnimCoroutines[(int)AnimatronicEnum.Foxy] != null) StopCoroutine(AnimCoroutines[(int)AnimatronicEnum.Foxy]);
-                AnimCoroutines[(int)AnimatronicEnum.Foxy] = StartCoroutine(foxy.FoxyRunRoutine(waitTime));
+                if (AnimCoroutines[(int)AnimatronicEnum.Foxy] != null)
+                {
+                    StopCoroutine(AnimCoroutines[(int)AnimatronicEnum.Foxy]);
+                    AnimCoroutines[(int)AnimatronicEnum.Foxy] = null;
+                }
+
+                AnimCoroutines[(int)AnimatronicEnum.Foxy] ??= StartCoroutine(foxy.FoxyRunRoutine(waitTime));
             }
             else
             {
@@ -251,8 +264,6 @@ public class AIManager : MonoBehaviour
         {
             SwapFoxyRoutine(false, isCamUp);
         }
-
-        Debug.LogWarning("isCamUp: " + isCamUp + ". isGFreddyEvent: " + isGFreddyEvent);
 
         if (isGFreddyEvent
             && !isCamUp)

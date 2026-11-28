@@ -16,7 +16,7 @@ MonoBehaviour:
   CamName: Stage
   cam: 9
   emptyCam: {fileID: 2559684644570751642, guid: 496d694bcbbee844381f44576c495ecd, type: 3}
-  connectedCams: 0700000006000000
+  connectedCams: 0600000007000000
   animSpriteDataArr:
   - anim: 2
     sprite: {fileID: 21300000, guid: 5d2f92029d4af1544908157286ee1cf9, type: 3}

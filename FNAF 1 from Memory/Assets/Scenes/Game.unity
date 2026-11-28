@@ -862,6 +862,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIManager
   animDifficulty: {fileID: 0}
+  difficultyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.033834156
+      outSlope: 0.033834156
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.29486528
+    - serializedVersion: 3
+      time: 9.745661
+      value: 0.6197146
+      inSlope: 0.09243637
+      outSlope: 0.09243637
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.7217609
+      outWeight: 0.18729156
+    - serializedVersion: 3
+      time: 20
+      value: 2
+      inSlope: 0.06702801
+      outSlope: 0.06702801
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09895305
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   foxyStage: 0
   foxyAlreadySeen: 0
   isGFreddyEvent: 0

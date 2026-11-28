@@ -74,11 +74,12 @@ public class BtnController : MonoBehaviour
                 FlickerRoutine = null;
             }
 
-            spriteRenderer.sprite = null;
+            spriteRenderer.enabled = false;
             if (isLight) OfficeManager.Singleton.DoorLightView(isLeft, false);
         }
         else
         {
+            spriteRenderer.enabled = true;
             if (isPressed)
             {
                 spriteRenderer.sprite = pressedSprite;
